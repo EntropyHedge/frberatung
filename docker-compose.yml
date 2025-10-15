@@ -33,7 +33,7 @@ services:
     volumes:
       - .:/app
     ports:
-      - "127.0.0.1:8000:8000"  # Only bind to localhost for nginx
+      - "0.0.0.0:8000:8000"  # Only bind to localhost for nginx
     networks:
       - backend
 

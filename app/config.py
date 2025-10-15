@@ -82,12 +82,16 @@ class DevelopmentConfig(BaseConfig):
             "'unsafe-inline'",
             "https://cdn.tailwindcss.com",
             "https://cdnjs.cloudflare.com",
+            "https://code.highcharts.com",
+            "https://cdn.jsdelivr.net",
+            
         ],
         "style-src": [
             "'self'",
             "'unsafe-inline'",
             "https://cdn.tailwindcss.com",
             "https://cdnjs.cloudflare.com",
-            "https://fonts.googleapis.com"
+            "https://fonts.googleapis.com",
+            
         ],
     }

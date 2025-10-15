@@ -7,6 +7,10 @@ import os
 @main_bp.route('/')
 def index():
     return render_template('home.html', current_user=current_user, year=datetime.now().year)
+
+@main_bp.route('/dashboard')
+def dashboard():
+    return render_template('dashboard/home.html', current_user=current_user, year=datetime.now().year)
     
 @main_bp.route('/charts')
 @login_required
