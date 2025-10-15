@@ -65,6 +65,7 @@ class ProductionConfig(BaseConfig):
     SESSION_COOKIE_SECURE = True
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = "Lax"
+
     # inherits TALISMAN_FORCE_HTTPS = True  → redirect to HTTPS
 
 
@@ -87,5 +88,6 @@ class DevelopmentConfig(BaseConfig):
             "'unsafe-inline'",
             "https://cdn.tailwindcss.com",
             "https://cdnjs.cloudflare.com",
+            "https://fonts.googleapis.com"
         ],
     }

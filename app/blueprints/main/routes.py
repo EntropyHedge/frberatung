@@ -6,9 +6,7 @@ from app.extensions import cache
 import os
 @main_bp.route('/')
 def index():
-    
-    #return render_template('index.html',current_user = current_user, year=datetime.now().year)
-    return "Hello World"
+    return render_template('home.html', current_user=current_user, year=datetime.now().year)
     
 @main_bp.route('/charts')
 @login_required

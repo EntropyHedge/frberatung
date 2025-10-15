@@ -1,28 +1,54 @@
 @import "tailwindcss";
 
-@layer base {
-  :root {
-    --accent-color: #da0b00;
-    --background-color: #121212;
-    --text-color: #ffffff;
+/* Tailwind v4: CSS-first theming via @theme */
+@theme {
+  --color-accent: #0000af;
+  --color-ink: #0B1220;
+  --color-ink-muted: #475569;
+  --color-surface-50: #F8FAFC;
+  --color-surface-100: #F1F5F9;
+  --color-surface-200: #E2E8F0;
+
+  --font-sans: Inter, ui-sans-serif, system-ui;
+  --font-display: "Plus Jakarta Sans", Inter, ui-sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --shadow-soft: 0 10px 30px rgba(2, 6, 23, 0.06);
+  --shadow-glow: 0 0 0 3px color-mix(in oklab, var(--color-accent) 12%, transparent), 0 0 36px color-mix(in oklab, var(--color-accent) 18%, transparent);
+
+  @keyframes accent-pulse {
+    0%, 100% { opacity: .25 }
+    50% { opacity: .5 }
   }
 }
 
+/* Project utilities matching previous inline CSS */
 @layer utilities {
-  /* Accent-color helpers */
-  .bg-accent-color       { background-color: var(--accent-color); }
-  .hover\:bg-accent-color:hover { background-color: var(--accent-color); }
+  .text-ink { color: var(--color-ink); }
+  .text-ink-muted { color: var(--color-ink-muted); }
+  .bg-surface-50 { background-color: var(--color-surface-50); }
+  .bg-surface-100 { background-color: var(--color-surface-100); }
+  .ring-surface-200 { --tw-ring-color: var(--color-surface-200); }
+  .border-surface-200 { border-color: var(--color-surface-200); }
 
-  .text-accent-color     { color: var(--accent-color); }
-  .border-accent-color   { border-color: var(--accent-color); }
+  .bg-accent { background-color: var(--color-accent); }
+  .text-accent { color: var(--color-accent); }
+  .ring-glow { box-shadow: var(--shadow-glow); }
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .animate-accent-pulse { animation: accent-pulse 3s ease-in-out infinite; }
 
-  /* White ➜ Accent-red text-gradient */
-  .text-gradient-accent {
-      background-image: linear-gradient(90deg,
-                        #ffffff 0%,
-                        rgba(218, 11, 0, 0.8) 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;                 /* keep the "glow" */
+  .glass { background: rgba(255,255,255,0.72); backdrop-filter: blur(10px); }
+
+  .bg-grid {
+    background-image: radial-gradient(circle at 1px 1px, rgba(2,6,23,0.08) 1px, transparent 0);
+    background-size: 22px 22px;
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.2) 40%, rgba(0,0,0,0));
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.2) 40%, rgba(0,0,0,0));
+  }
+
+  .accent-gradient {
+    background-image:
+      radial-gradient(900px 450px at 80% -10%, color-mix(in oklab, var(--color-accent) 8%, transparent), transparent 60%),
+      radial-gradient(800px 360px at 10% 20%, color-mix(in oklab, #0066ff 6%, transparent), transparent 60%);
   }
 }
