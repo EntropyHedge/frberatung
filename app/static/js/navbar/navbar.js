@@ -2,8 +2,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuButton = document.querySelector('.mobile-menu-button');
     const mobileMenu = document.querySelector('.mobile-menu');
-    const menuOpenIcon = mobileMenuButton.querySelector('svg:first-child');
-    const menuCloseIcon = mobileMenuButton.querySelector('svg:last-child');
+    if (!mobileMenuButton || !mobileMenu) return;
+
+    const menuOpenIcon = mobileMenuButton.querySelector('[data-icon="open"]');
+    const menuCloseIcon = mobileMenuButton.querySelector('[data-icon="close"]');
+    
+    if (!menuOpenIcon || !menuCloseIcon) return;
 
     if (mobileMenuButton && mobileMenu) {
         mobileMenuButton.addEventListener('click', function() {

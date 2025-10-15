@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Friedrich Beratung — Digitale Transformation & Strategieberatung</title>
-  <meta name="description" content="Professionelle Digitalisierungsberatung für mittelständische Unternehmen. Strategie, Prozessoptimierung und digitale Innovation aus einer Hand." />
+  <title>Friedrich Beratung — Finanzberatung für Privatpersonen</title>
+  <meta name="description" content="Smartere Finanzberatung für Einzelpersonen. Vom Fragebogen zum persönlichen Portfolio‑Blueprint – günstig, transparent, umsetzbar." />
   <meta name="theme-color" content="#ffffff" />
 
   <!-- Fonts -->
@@ -27,234 +27,176 @@
   <div aria-hidden="true" class="fixed inset-0 -z-10 bg-grid"></div>
 
   <!-- Navbar -->
-  <header class="sticky top-0 z-40">
-    <div class="glass border-b border-surface-200/80">
-      <nav class="max-w-7xl mx-auto px-4 md:px-6">
-        <div class="flex h-16 items-center justify-between">
-          <a href="/" class="flex items-center gap-3">
-            <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl ring-glow bg-white">
-              <svg viewBox="0 0 24 24" class="h-5 w-5 text-accent" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-              </svg>
-            </span>
-            <span class="font-display text-lg font-semibold tracking-tight">Friedrich Beratung</span>
-          </a>
-
-          <div class="hidden md:flex items-center gap-8 text-ink-muted">
-            <a href="#leistungen" class="hover:text-ink transition-colors">Leistungen</a>
-            <a href="#methodik" class="hover:text-ink transition-colors">Methodik</a>
-            <a href="#bereiche" class="hover:text-ink transition-colors">Beratungsbereiche</a>
-            <a href="#kontakt" class="hover:text-ink transition-colors">Kontakt</a>
-          </div>
-
-          <div class="hidden md:flex items-center gap-3">
-            <a href="#kontakt" class="px-5 py-2.5 rounded-xl bg-accent hover:bg-accent/90 text-white font-semibold shadow-soft transition-colors">Erstgespräch vereinbaren</a>
-          </div>
-
-          <button data-collapse-toggle="menu" type="button" class="md:hidden inline-flex items-center justify-center p-2 rounded-lg hover:bg-surface-100 focus:outline-none focus:ring-2 focus:ring-accent/40" aria-controls="menu" aria-expanded="false">
-            <span class="sr-only">Hauptmenü öffnen</span>
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-          </button>
-        </div>
-      </nav>
-      <div id="menu" class="hidden md:hidden border-t border-surface-200">
-        <div class="px-4 py-3 space-y-2 text-ink-muted">
-          <a href="#leistungen" class="block hover:text-ink">Leistungen</a>
-          <a href="#methodik" class="block hover:text-ink">Methodik</a>
-          <a href="#bereiche" class="block hover:text-ink">Beratungsbereiche</a>
-          <a href="#kontakt" class="block hover:text-ink">Kontakt</a>
-          <div class="pt-2">
-            <a href="#kontakt" class="block px-3 py-2 rounded-xl bg-accent text-white font-semibold text-center">Erstgespräch</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
+  {% include 'partials/navbar.html' %}
 
   <main id="main" class="max-w-7xl mx-auto px-4 md:px-6">
     <!-- Hero Section -->
     <section class="pt-20 md:pt-28 pb-16 md:pb-20 grid md:grid-cols-2 items-center gap-12">
-      <div class="space-y-8">
-        <h1 class="font-display text-5xl md:text-7xl leading-[1.1] tracking-tight text-ink">
-          Digitale <span class="text-accent">Transformation</span><br/>
-          <span class="text-3xl md:text-4xl text-ink-muted mt-4 block">
-            die Ihr Unternehmen nach vorne bringt
+      <div>
+        <h1 class="font-display text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-[-0.02em] text-ink">
+          Finanzielle <span class="text-accent">Intelligenz</span><br/>
+          <span class="text-2xl md:text-3xl lg:text-4xl text-ink-muted mt-3 md:mt-4 block font-normal">
+            vom Fragebogen zum persönlichen Portfolio‑Blueprint
           </span>
         </h1>
-        <p class="text-lg md:text-xl text-ink-muted leading-relaxed">
-          Wir begleiten mittelständische Unternehmen bei der digitalen Transformation. 
-          Von der Strategieentwicklung über Prozessoptimierung bis zur Implementierung – 
-          praxisnah, messbar und nachhaltig.
+        <p class="mt-8 text-base md:text-lg leading-relaxed text-ink-muted max-w-xl">
+          Beantworten Sie einen kurzen Fragebogen und erhalten Sie
+          einen günstigen, klaren Portfolio‑Blueprint – transparent, umsetzbar und passend
+          zu Ihrer Risikokategorie.
         </p>
-        <div class="hero-cta flex flex-wrap items-center gap-4">
-          <a id="start" href="#kontakt" class="px-6 py-3.5 rounded-xl bg-accent hover:bg-accent/90 text-white font-semibold shadow-soft transition-all hover:scale-105">
-            Kostenloses Erstgespräch
+        <div class="hero-cta mt-10 flex flex-wrap items-center gap-3 md:gap-4">
+          <a id="start" href="#leistungen" class="px-6 py-3.5 rounded-xl bg-accent hover:bg-accent/90 text-white font-semibold shadow-soft transition-all hover:scale-105">
+            Fragebogen starten
           </a>
-          <a href="#leistungen" class="px-6 py-3.5 rounded-xl border border-surface-200 hover:bg-surface-50 transition-all">
-            Unsere Leistungen
+          <a href="#methodik" class="px-6 py-3.5 rounded-xl border border-surface-200 hover:bg-surface-50 transition-all font-medium">
+            So funktioniert's
           </a>
         </div>
-        <div class="flex items-center gap-6 text-sm text-ink-muted">
+        <div class="mt-12 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-ink-muted">
           <span class="flex items-center gap-2">
             <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-            15+ Jahre Erfahrung
+            Günstiger als klassische Beratung
           </span>
           <span class="flex items-center gap-2">
             <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-            Messbare Erfolge
+            Blueprint in 48 Stunden
           </span>
           <span class="flex items-center gap-2">
             <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-            100+ Projekte
+            Transparent & unabhängig
           </span>
         </div>
       </div>
 
       <!-- Hero Visual -->
-      <div class="relative h-[420px] md:h-[500px]">
-        <div class="absolute inset-0 flex items-center justify-center">
-          <div class="relative h-80 w-80 md:h-[420px] md:w-[420px] rounded-full border border-surface-200 ring-glow bg-white">
-            <div class="absolute inset-4 rounded-full border border-surface-200"></div>
-            <div class="absolute inset-0 flex items-center justify-center">
-              <svg viewBox="0 0 24 24" class="h-24 w-24 md:h-32 md:w-32 text-accent/30 animate-accent-pulse" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
+      <img 
+        src="{{ url_for('static', filename='img/hero-marc-friedrich.avif') }}" 
+        alt="Marc Friedrich" 
+        class="w-full rounded-2xl shadow-l"
+      />
     </section>
 
     <!-- Methodik -->
     <section id="methodik" class="py-20 md:py-28">
-      <div class="text-center mb-12">
-        <h2 class="font-display text-4xl md:text-5xl tracking-tight mb-4">Unsere Methodik</h2>
-        <p class="text-lg text-ink-muted max-w-2xl mx-auto">Ein bewährter 3-Phasen-Ansatz für nachhaltige digitale Transformation</p>
+      <div class="text-center mb-16">
+        <h2 class="font-display text-3xl md:text-4xl lg:text-5xl tracking-tight leading-tight mb-3">Unsere Methodik</h2>
+        <p class="text-base md:text-lg text-ink-muted max-w-2xl mx-auto leading-relaxed">In drei Schritten von Ihren Antworten zum umsetzbaren Portfolio‑Blueprint</p>
       </div>
 
       <div class="relative max-w-7xl mx-auto">
         <div class="grid md:grid-cols-3 gap-8 relative z-10">
           <!-- Phase 1 -->
           <article class="rounded-2xl bg-white p-7 ring-1 ring-inset ring-surface-200 cursor-glow how-card h-full flex flex-col">
-            <div class="flex items-start gap-4 mb-5">
+            <div class="mb-6">
               <span class="inline-flex h-9 w-9 items-center justify-center rounded-md bg-accent/10 text-accent ring-1 ring-accent/20 font-semibold">1</span>
-              <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-surface-50 ring-1 ring-surface-200">
-                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-              </span>
             </div>
-            <h3 class="text-lg font-semibold mb-2">Analyse & Strategie</h3>
-            <p class="text-ink-muted">Wir erfassen Ihren Status Quo, identifizieren Potenziale und entwickeln eine maßgeschneiderte Digitalisierungsstrategie.</p>
+            <h3 class="text-lg font-semibold mb-3 leading-snug">Fragebogen & Profil</h3>
+            <p class="text-ink-muted text-[15px] leading-relaxed">In 10–15 Minuten erfassen wir Ziele, Zeithorizont, Risikotoleranz und Erfahrung.</p>
           </article>
 
           <!-- Phase 2 -->
           <article class="rounded-2xl bg-white p-7 ring-1 ring-inset ring-surface-200 cursor-glow how-card h-full flex flex-col">
-            <div class="flex items-start gap-4 mb-5">
+            <div class="mb-6">
               <span class="inline-flex h-9 w-9 items-center justify-center rounded-md bg-accent/10 text-accent ring-1 ring-accent/20 font-semibold">2</span>
-              <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-surface-50 ring-1 ring-surface-200">
-                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-              </span>
             </div>
-            <h3 class="text-lg font-semibold mb-2">Umsetzung & Optimierung</h3>
-            <p class="text-ink-muted">Gemeinsam mit Ihrem Team setzen wir die Maßnahmen um, optimieren Prozesse und implementieren neue Technologien.</p>
+            <h3 class="text-lg font-semibold mb-3 leading-snug">Portfolio‑Blueprint</h3>
+            <p class="text-ink-muted text-[15px] leading-relaxed">Konkrete ETF/Index‑Bausteine, Gewichtung, Kosten, Rebalancing‑Plan – auf Ihr Profil zugeschnitten.</p>
           </article>
 
           <!-- Phase 3 -->
           <article class="rounded-2xl bg-white p-7 ring-1 ring-inset ring-surface-200 cursor-glow how-card h-full flex flex-col">
-            <div class="flex items-start gap-4 mb-5">
+            <div class="mb-6">
               <span class="inline-flex h-9 w-9 items-center justify-center rounded-md bg-accent/10 text-accent ring-1 ring-accent/20 font-semibold">3</span>
-              <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-surface-50 ring-1 ring-surface-200">
-                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-              </span>
             </div>
-            <h3 class="text-lg font-semibold mb-2">Monitoring & Skalierung</h3>
-            <p class="text-ink-muted">Wir messen Erfolge, lernen kontinuierlich und skalieren bewährte Lösungen auf weitere Unternehmensbereiche.</p>
+            <h3 class="text-lg font-semibold mb-3 leading-snug">Umsetzung & Begleitung</h3>
+            <p class="text-ink-muted text-[15px] leading-relaxed">Auf Wunsch begleiten wir die Umsetzung, jährliches Review und Rebalancing‑Reminder.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- Beratungsbereiche -->
+    <!-- Asset Categories -->
     <section id="bereiche" class="py-20 md:py-28 border-t border-surface-200">
-      <div class="text-center mb-12">
-        <h2 class="font-display text-4xl md:text-5xl tracking-tight mb-4">Unsere Beratungsbereiche</h2>
-        <p class="text-lg text-ink-muted max-w-2xl mx-auto">Ganzheitliche Beratung für alle Aspekte Ihrer digitalen Transformation</p>
+      <div class="text-center mb-16">
+        <h2 class="font-display text-3xl md:text-4xl lg:text-5xl tracking-tight leading-tight mb-3">Diversifizierte Anlagebereiche</h2>
+        <p class="text-base md:text-lg text-ink-muted max-w-2xl mx-auto leading-relaxed">Von Gold über Aktien bis Bitcoin – Ihr Blueprint deckt alle relevanten Anlageklassen ab</p>
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <article class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 cursor-glow transition-all">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="font-semibold text-lg">Digitale Strategie</h3>
-            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 ring-1 ring-accent/20">
-              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
-            </span>
-          </div>
-          <p class="text-ink-muted leading-relaxed">Entwicklung einer klaren digitalen Vision und Roadmap für Ihr Unternehmen – von der IST-Analyse bis zum Zielbild.</p>
-        </article>
-
-        <article class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 cursor-glow transition-all">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="font-semibold">Prozessoptimierung</h3>
-            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 ring-1 ring-accent/20">
-              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-            </span>
-          </div>
-          <p class="text-ink-muted">Analyse und Optimierung Ihrer Geschäftsprozesse mit modernen Methoden wie Lean Management und Business Process Management.</p>
-        </article>
-
-        <article class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 cursor-glow">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="font-semibold">Change Management</h3>
-            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 ring-1 ring-accent/20">
-              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-            </span>
-          </div>
-          <p class="text-ink-muted">Begleitung Ihrer Mitarbeiter durch den digitalen Wandel mit gezielten Trainings und Kommunikationsmaßnahmen.</p>
-        </article>
-
-        <article class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 cursor-glow">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="font-semibold">IT-Architektur</h3>
-            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 ring-1 ring-accent/20">
-              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/></svg>
-            </span>
-          </div>
-          <p class="text-ink-muted">Planung und Modernisierung Ihrer IT-Landschaft – Cloud, On-Premise oder Hybrid. Skalierbar und zukunftssicher.</p>
-        </article>
-
-        <article class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 cursor-glow">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="font-semibold">Datenanalyse & BI</h3>
-            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 ring-1 ring-accent/20">
-              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-            </span>
-          </div>
-          <p class="text-ink-muted">Aufbau von Dashboards und Analytics-Lösungen für datengetriebene Entscheidungen in Echtzeit.</p>
-        </article>
-
-        <article class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 cursor-glow">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="font-semibold">Digitale Geschäftsmodelle</h3>
+          <div class="flex items-center justify-between mb-5">
+            <h3 class="font-semibold text-lg leading-tight">ETFs & Indexfonds</h3>
             <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 ring-1 ring-accent/20">
               <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
             </span>
           </div>
-          <p class="text-ink-muted">Entwicklung neuer digitaler Geschäftsmodelle und Umsatzquellen für nachhaltiges Wachstum.</p>
+          <p class="text-ink-muted text-[15px] leading-relaxed">Breite Diversifikation über MSCI World, S&P 500, Emerging Markets und mehr – kosteneffizient und transparent.</p>
+        </article>
+
+        <article class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 cursor-glow transition-all">
+          <div class="flex items-center justify-between mb-5">
+            <h3 class="font-semibold text-lg leading-tight">Aktien</h3>
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 ring-1 ring-accent/20">
+              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            </span>
+          </div>
+          <p class="text-ink-muted text-[15px] leading-relaxed">Einzelaktien-Komponenten für erfahrene Anleger – Blue Chips, Dividendenwerte oder Wachstumstitel.</p>
+        </article>
+
+        <article class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 cursor-glow">
+          <div class="flex items-center justify-between mb-5">
+            <h3 class="font-semibold text-lg leading-tight">Gold & Edelmetalle</h3>
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 ring-1 ring-accent/20">
+              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </span>
+          </div>
+          <p class="text-ink-muted text-[15px] leading-relaxed">Absicherung durch physische Edelmetalle oder ETCs – Gold, Silber, Platin als Portfolio-Anker.</p>
+        </article>
+
+        <article class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 cursor-glow">
+          <div class="flex items-center justify-between mb-5">
+            <h3 class="font-semibold text-lg leading-tight">Bitcoin & Krypto</h3>
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 ring-1 ring-accent/20">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24"><path d="M13.8 3.1c2.6.5 4.1 2.2 4.1 4.2 0 1.7-1 3.4-2.9 4.1 2.5.8 3.8 2.4 3.8 4.5 0 3-2.5 5.1-6.3 5.1H6.8V3h5.4c.6 0 1.1 0 1.6.1Zm-2.8 6.9c1.9 0 3.1-.9 3.1-2.3 0-1.3-1.1-2.1-3-2.1H9.7v4.4h1.3Zm.5 8.1c2.2 0 3.6-1 3.6-2.6s-1.3-2.5-3.7-2.5H9.7v5.1h1.8Z"/></svg>
+            </span>
+          </div>
+          <p class="text-ink-muted text-[15px] leading-relaxed">Bitcoin-Allokation und Krypto-Exposure – direkt, über ETFs oder strukturierte Produkte.</p>
+        </article>
+
+        <article class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 cursor-glow">
+          <div class="flex items-center justify-between mb-5">
+            <h3 class="font-semibold text-lg leading-tight">Anleihen</h3>
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 ring-1 ring-accent/20">
+              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </span>
+          </div>
+          <p class="text-ink-muted text-[15px] leading-relaxed">Staatsanleihen und Unternehmensanleihen für Stabilität und laufende Erträge im Portfolio.</p>
+        </article>
+
+        <article class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 cursor-glow">
+          <div class="flex items-center justify-between mb-5">
+            <h3 class="font-semibold text-lg leading-tight">Alternative Investments</h3>
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 ring-1 ring-accent/20">
+              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            </span>
+          </div>
+          <p class="text-ink-muted text-[15px] leading-relaxed">Immobilien-REITs, Rohstoffe und weitere Anlageklassen zur Diversifikation und Inflationsschutz.</p>
         </article>
       </div>
     </section>
 
     <!-- Leistungen / Pricing -->
     <section id="leistungen" class="py-20 md:py-28 border-t border-surface-200">
-      <div class="text-center mb-12">
-        <h2 class="font-display text-4xl md:text-5xl tracking-tight mb-4">Unsere Leistungspakete</h2>
-        <p class="text-lg text-ink-muted">Flexible Beratung – vom Impuls-Workshop bis zur Langzeitbegleitung</p>
+      <div class="text-center mb-16">
+        <h2 class="font-display text-3xl md:text-4xl lg:text-5xl tracking-tight leading-tight mb-3">Unsere Leistungspakete</h2>
+        <p class="text-base md:text-lg text-ink-muted leading-relaxed">Flexible Beratung – vom Impuls-Workshop bis zur Langzeitbegleitung</p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         <article class="rounded-2xl bg-white p-8 ring-1 ring-inset ring-surface-200 cursor-glow">
-          <h3 class="font-semibold text-2xl mb-2">Impuls</h3>
-          <p class="text-ink-muted mb-6">Schneller Einstieg in spezifische Themen</p>
-          <p class="text-4xl font-display mb-8">ab €2.500</p>
+          <h3 class="font-semibold text-xl mb-1.5 leading-tight">Impuls</h3>
+          <p class="text-ink-muted text-sm mb-8">Schneller Einstieg in spezifische Themen</p>
+          <p class="text-4xl font-display mb-8 leading-none">ab €2.500</p>
           <ul class="space-y-3 text-ink-muted mb-8">
             <li class="flex items-center gap-2">
               <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
@@ -280,9 +222,9 @@
 
         <article class="rounded-2xl bg-white p-8 ring-1 ring-inset ring-surface-200 border-2 border-accent/30 cursor-glow relative">
           <span class="absolute -top-3 left-8 px-3 py-1 bg-accent text-white text-xs font-bold rounded-full">BELIEBT</span>
-          <h3 class="font-semibold text-2xl mb-2">Projekt</h3>
-          <p class="text-ink-muted mb-6">Strukturierte Transformation</p>
-          <p class="text-4xl font-display mb-8">ab €15.000</p>
+          <h3 class="font-semibold text-xl mb-1.5 leading-tight">Projekt</h3>
+          <p class="text-ink-muted text-sm mb-8">Strukturierte Transformation</p>
+          <p class="text-4xl font-display mb-8 leading-none">ab €15.000</p>
           <ul class="space-y-3 text-ink-muted mb-8">
             <li class="flex items-center gap-2">
               <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
@@ -311,9 +253,9 @@
         </article>
 
         <article class="rounded-2xl bg-white p-8 ring-1 ring-inset ring-surface-200 cursor-glow">
-          <h3 class="font-semibold text-2xl mb-2">Retainer</h3>
-          <p class="text-ink-muted mb-6">Kontinuierliche Begleitung</p>
-          <p class="text-4xl font-display mb-8">individuell</p>
+          <h3 class="font-semibold text-xl mb-1.5 leading-tight">Retainer</h3>
+          <p class="text-ink-muted text-sm mb-8">Kontinuierliche Begleitung</p>
+          <p class="text-4xl font-display mb-8 leading-none">individuell</p>
           <ul class="space-y-3 text-ink-muted mb-8">
             <li class="flex items-center gap-2">
               <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
@@ -345,17 +287,17 @@
 
     <!-- Kontakt CTA -->
     <section id="kontakt" class="py-20 md:py-28 border-t border-surface-200">
-      <div class="max-w-3xl mx-auto text-center">
-        <h2 class="font-display text-4xl md:text-5xl tracking-tight mb-6">Bereit für den nächsten Schritt?</h2>
-        <p class="text-lg md:text-xl text-ink-muted mb-8 leading-relaxed">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="font-display text-3xl md:text-4xl lg:text-5xl tracking-tight leading-tight mb-5">Bereit für den nächsten Schritt?</h2>
+        <p class="text-base md:text-lg text-ink-muted mb-10 leading-relaxed">
           Vereinbaren Sie ein kostenloses Erstgespräch. Wir analysieren Ihre Situation, 
           identifizieren Quick Wins und zeigen Ihnen konkrete Maßnahmen für Ihre digitale Transformation.
         </p>
-        <div class="flex flex-wrap justify-center gap-4">
+        <div class="flex flex-wrap justify-center gap-3 md:gap-4">
           <a href="mailto:kontakt@friedrich-beratung.de" class="px-8 py-4 rounded-xl bg-accent hover:bg-accent/90 text-white font-semibold shadow-soft transition-all hover:scale-105">
             E-Mail schreiben
           </a>
-          <a href="tel:+491234567890" class="px-8 py-4 rounded-xl border border-surface-200 hover:bg-surface-50 transition-all">
+          <a href="tel:+491234567890" class="px-8 py-4 rounded-xl border border-surface-200 hover:bg-surface-50 transition-all font-medium">
             +49 123 456 7890
           </a>
         </div>
@@ -377,6 +319,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="{{ url_for('static', filename='js/navbar/navbar.js') }}"></script>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
