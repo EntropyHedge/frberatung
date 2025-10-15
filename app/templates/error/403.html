@@ -1,0 +1,24 @@
+
+{% if current_user.is_authenticated %}
+    {% extends "base.html" %}
+{% else %}
+    {% extends "blank_base.html" %}
+{% endif %}
+
+{% block title %}403 - Zugang verweigert{% endblock %}
+
+{% block content %}
+<div class="text-center py-12">
+    <h1 class="text-6xl font-bold text-primary mb-4">403</h1>
+    <h2 class="text-2xl font-semibold mb-6">Zugang verweigert</h2>
+    <p class="text-lg mb-8">Sie haben keine Berechtigung, auf diese Ressource zuzugreifen.</p>
+    
+    <div class="mb-8">
+        <img src="{{ url_for('static', filename='images/error/error.svg') }}" alt="Access forbidden illustration" class="max-w-md mx-auto">
+    </div>
+    
+    <a href="{{ url_for('main.index') }}" class="bg-primary text-white px-6 py-3 rounded-md hover:bg-primary/90 transition-colors inline-block">
+        Zurück zur Startseite
+    </a>
+</div>
+{% endblock %}

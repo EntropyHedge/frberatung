@@ -1,0 +1,23 @@
+{% if current_user.is_authenticated %}
+    {% extends "base.html" %}
+{% else %}
+    {% extends "blank_base.html" %}
+{% endif %}
+
+{% block title %}500 - Interner Serverfehler{% endblock %}
+
+{% block content %}
+<div class="text-center py-12">
+    <h1 class="text-6xl font-bold text-primary mb-4">500</h1>
+    <h2 class="text-2xl font-semibold mb-6">Interner Serverfehler</h2>
+    <p class="text-lg mb-8">Etwas ist schief gelaufen auf unserer Seite. Wir arbeiten an der Fehlerbehebung.</p>
+    
+    <div class="mb-8">
+        <img src="{{ url_for('static', filename='images/error/error.svg') }}" alt="Server error illustration" class="max-w-md mx-auto">
+    </div>
+    
+    <a href="{{ url_for('main.index') }}" class="bg-primary text-white px-6 py-3 rounded-md hover:bg-primary/90 transition-colors inline-block">
+        Zurück zur Startseite
+    </a>
+</div>
+{% endblock %}

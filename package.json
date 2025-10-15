@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "highcharts": "^12.2.0",
+    "htmx.org": "^1.9.12"
+  },
+  "scripts": {
+    "build": "tailwindcss -i ./app/static/src/input.css -o ./app/static/css/main.css",
+    "watch": "tailwindcss -i ./app/static/src/input.css -o ./app/static/css/main.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.6",
+    "tailwindcss": "^4.1.6"
+  }
+}

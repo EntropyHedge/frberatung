@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Access Denied{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8 text-center">
+        <div>
+            <i class="fas fa-user-shield text-6xl text-red-500 mb-6"></i>
+            <h2 class="mt-6 text-3xl font-extrabold text-white">
+                Access Denied
+            </h2>
+            <p class="mt-2 text-sm text-gray-300">
+                Your account is not authorized to access this application.
+            </p>
+        </div>
+        
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+            <div class="text-left space-y-4">
+                <h3 class="text-lg font-semibold text-white mb-3">What happened?</h3>
+                <p class="text-gray-300 text-sm">
+                    While you are logged in to the main site, your account is not on the approved access list for this application.
+                </p>
+                
+                <h3 class="text-lg font-semibold text-white mb-3 pt-4">What can you do?</h3>
+                <ul class="text-gray-300 text-sm space-y-2">
+                    <li class="flex items-start">
+                        <i class="fas fa-envelope text-accent-color mr-2 mt-0.5"></i>
+                        Contact the administrator to request access
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-arrow-left text-accent-color mr-2 mt-0.5"></i>
+                        Return to the main site
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="https://ziel.zone" 
+               class="w-full sm:w-auto bg-accent-color hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md transition-colors">
+                <i class="fas fa-home mr-2"></i>
+                Return to Main Site
+            </a>
+            <a href="mailto:support@yourapp.com" 
+               class="w-full sm:w-auto bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md transition-colors">
+                <i class="fas fa-envelope mr-2"></i>
+                Request Access
+            </a>
+        </div>
+        
+        <div class="text-xs text-gray-500 mt-6">
+            Error Code: 403 - Forbidden
+        </div>
+    </div>
+</div>
+{% endblock %}

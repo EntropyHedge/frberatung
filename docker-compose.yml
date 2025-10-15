@@ -1,0 +1,68 @@
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: friedrichreport
+      POSTGRES_USER: friedrichuser
+      POSTGRES_PASSWORD: friedrichpass
+    volumes:
+      - ./docker_data/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - ./docker_data/redis:/data
+    ports:
+      - "6379:6379"
+
+  web:
+    build: .
+    depends_on:
+      - db
+      - redis
+    environment:
+      FLASK_ENV: development
+      SECRET_KEY: dev-secret-key
+      DATABASE_URL: postgresql://friedrichuser:friedrichpass@db/friedrichreport
+      REDIS_HOST: redis
+      GUNICORN_CMD_ARGS: "--workers=4 --timeout=120 --log-level=info"
+    volumes:
+      - .:/app                               # live-reload friendly
+    ports:
+      - "8000:8000"
+
+  # ---------- Celery worker ----------
+  celery:
+    build: .
+    command: >
+      celery -A app.make_celery:celery_app worker --loglevel=info
+    depends_on:
+      - db
+      - redis
+    environment:
+      FLASK_ENV: development
+      SECRET_KEY: dev-secret-key
+      DATABASE_URL: postgresql://friedrichuser:friedrichpass@db/friedrichreport
+      REDIS_HOST: redis
+    volumes:
+      - .:/app
+    restart: unless-stopped
+
+  # ---------- Celery beat -------------
+  celerybeat:
+    build: .
+    command: >
+      celery -A app.make_celery:celery_app beat --loglevel=info
+    depends_on:
+      - db
+      - redis
+    environment:
+      FLASK_ENV: development
+      SECRET_KEY: dev-secret-key
+      DATABASE_URL: postgresql://friedrichuser:friedrichpass@db/friedrichreport
+      REDIS_HOST: redis
+    volumes:
+      - .:/app
+    restart: unless-stopped

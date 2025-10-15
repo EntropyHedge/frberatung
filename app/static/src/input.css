@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --accent-color: #da0b00;
+    --background-color: #121212;
+    --text-color: #ffffff;
+  }
+}
+
+@layer utilities {
+  /* Accent-color helpers */
+  .bg-accent-color       { background-color: var(--accent-color); }
+  .hover\:bg-accent-color:hover { background-color: var(--accent-color); }
+
+  .text-accent-color     { color: var(--accent-color); }
+  .border-accent-color   { border-color: var(--accent-color); }
+
+  /* White ➜ Accent-red text-gradient */
+  .text-gradient-accent {
+      background-image: linear-gradient(90deg,
+                        #ffffff 0%,
+                        rgba(218, 11, 0, 0.8) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;                 /* keep the "glow" */
+  }
+}

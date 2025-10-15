@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="{{ url_for('static', filename='js/htmx.min.js') }}"></script>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/logos/fr_logo.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base/base.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="matrix-bg text-white min-h-screen flex flex-col">
+    {% include 'partials/navbar.html' %}
+    
+    <main class="flex-grow">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    {% include 'partials/footer.html' %}
+    <script src="{{ url_for('static', filename='js/navbar/navbar.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
