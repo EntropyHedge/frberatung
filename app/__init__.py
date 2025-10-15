@@ -2,18 +2,16 @@ import os
 import logging
 from logging.handlers import RotatingFileHandler
 import json
-from flask import Flask, render_template
-import pandas as pd 
+from flask import Flask, render_template, session
 from flask_session import Session
 from flask_migrate import Migrate
+from werkzeug.middleware.proxy_fix import ProxyFix
+from flask_talisman import Talisman
 from .config import DevelopmentConfig, ProductionConfig
 from .extensions import db, cache, limiter, talisman, login_manager, configure_celery
 from .blueprints.main import main_bp
 from .blueprints.auth import auth_bp
 from .blueprints.api import api_bp
-from flask import session
-from werkzeug.middleware.proxy_fix import ProxyFix
-from flask_talisman import Talisman
 
 
 def create_app(config_class=None):
@@ -35,6 +33,9 @@ def create_app(config_class=None):
     cache.init_app(app)
     limiter.init_app(app)
     login_manager.init_app(app)
+    
+    # Configure Flask-Login user loader and anonymous user
+    from . import auth_utils
 
     # --- Flask-Talisman --------------------------------------------------------
     Talisman(
@@ -42,15 +43,6 @@ def create_app(config_class=None):
         force_https=app.config["TALISMAN_FORCE_HTTPS"],
         content_security_policy=app.config["TALISMAN_CSP"],
     )
-
-    # Initialize Flask-Login
-    #login_manager.login_view = ('auth.check_login')
-    #login_manager.login_view = 'auth.login_page' # Redirect here if @login_required fails
-    #login_manager.login_message = "Please log in to access this page."
-    #login_manager.login_message_category = "info"
-
-    
-    #from . import auth_utils
     
     # Set up logging (only if not in debug mode)
     if not app.debug:

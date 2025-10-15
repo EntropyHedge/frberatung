@@ -7,15 +7,17 @@ services:
       POSTGRES_PASSWORD: friedrichpass
     volumes:
       - ./docker_data/postgres:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+    # ports removed - only accessible from other containers
+    networks:
+      - backend
 
   redis:
     image: redis:7-alpine
     volumes:
       - ./docker_data/redis:/data
-    ports:
-      - "6379:6379"
+    # ports removed - only accessible from other containers
+    networks:
+      - backend
 
   web:
     build: .
@@ -29,11 +31,12 @@ services:
       REDIS_HOST: redis
       GUNICORN_CMD_ARGS: "--workers=4 --timeout=120 --log-level=info"
     volumes:
-      - .:/app                               # live-reload friendly
+      - .:/app
     ports:
-      - "8000:8000"
+      - "127.0.0.1:8000:8000"  # Only bind to localhost for nginx
+    networks:
+      - backend
 
-  # ---------- Celery worker ----------
   celery:
     build: .
     command: >
@@ -49,8 +52,9 @@ services:
     volumes:
       - .:/app
     restart: unless-stopped
+    networks:
+      - backend
 
-  # ---------- Celery beat -------------
   celerybeat:
     build: .
     command: >
@@ -66,3 +70,9 @@ services:
     volumes:
       - .:/app
     restart: unless-stopped
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
