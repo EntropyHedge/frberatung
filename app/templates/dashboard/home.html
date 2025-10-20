@@ -19,6 +19,7 @@
 
   <style>
     :root { color-scheme: light; }
+    .dark { color-scheme: dark; }
     
     /* Smooth sidebar transitions */
     #logo-sidebar {
@@ -114,10 +115,10 @@
   </style>
 </head>
 
-<body class="bg-surface-50 text-ink font-sans antialiased">
+<body class="bg-surface-50 dark:bg-surface-100 text-ink dark:text-ink-dark font-sans antialiased transition-colors duration-300">
   <!-- Sidebar -->
   <aside id="logo-sidebar" class="fixed top-0 left-0 z-50 w-64 h-screen transition-transform -translate-x-full md:translate-x-0" aria-label="Sidebar">
-    <div class="h-full px-3 pt-4 pb-24 md:pb-4 overflow-y-auto bg-white border-r border-surface-200 flex flex-col">
+    <div class="h-full px-3 pt-4 pb-24 md:pb-4 overflow-y-auto bg-white dark:bg-surface-100 border-r border-surface-200 dark:border-surface-200 flex flex-col transition-colors duration-300">
       <!-- Logo -->
       <div class="flex items-center gap-2 px-3 py-4 mb-6">
         <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-black text-white text-xs flex-shrink-0">✦</span>
@@ -196,10 +197,10 @@
   <!-- Main Content -->
   <div id="main-content" class="md:ml-64">
     <!-- Top navbar -->
-    <nav class="sticky top-0 z-40 bg-white border-b border-surface-200 px-4 py-3">
+    <nav class="sticky top-0 z-40 bg-white dark:bg-surface-100 border-b border-surface-200 dark:border-surface-200 px-4 py-3 shadow-soft transition-colors duration-300">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 text-ink-muted rounded-lg md:hidden hover:bg-surface-100 focus:outline-none focus:ring-2 focus:ring-accent/40">
+          <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 text-ink-muted rounded-lg md:hidden hover:bg-surface-100 focus:outline-none focus:ring-2 focus:ring-accent/40 soft-pressable">
             <span class="sr-only">Menü öffnen</span>
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -208,13 +209,21 @@
         </div>
 
         <div class="flex items-center gap-3">
-          <button type="button" class="p-2 text-ink-muted hover:bg-surface-100 rounded-lg transition-colors">
+          <button id="theme-toggle" type="button" class="p-2 text-ink-muted hover:bg-surface-100 rounded-lg soft-pressable relative overflow-hidden">
+            <svg id="theme-toggle-light-icon" class="w-5 h-5 transition-all duration-300 rotate-0 scale-100" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+            <svg id="theme-toggle-dark-icon" class="w-5 h-5 transition-all duration-300 absolute inset-0 m-auto rotate-90 scale-0" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+          </button>
+          <button type="button" class="p-2 text-ink-muted hover:bg-surface-100 rounded-lg soft-pressable">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
             </svg>
           </button>
           <div class="flex items-center gap-2">
-            <img class="w-8 h-8 rounded-full" src="https://ui-avatars.com/api/?name=User&background=0000af&color=fff" alt="User">
+            <img class="w-8 h-8 rounded-full shadow-m hover:shadow-l transition-shadow duration-150" src="https://ui-avatars.com/api/?name=User&background=0000af&color=fff" alt="User">
             <span class="text-sm font-medium text-ink hidden sm:block">{{ current_user.name }}</span>
           </div>
         </div>
@@ -226,84 +235,51 @@
       <!-- Stats Cards -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <!-- Card 1 -->
-        <div class="soft-elevated rounded-2xl p-6">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-sm font-medium text-ink-muted">Portfolio-Wert</h3>
-            <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10">
-              <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
-              </svg>
-            </span>
-          </div>
-          <p class="text-2xl font-display font-semibold text-ink mb-1">€25.430</p>
-          <p class="text-xs text-green-600 flex items-center gap-1">
-            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
-            </svg>
-            +8,4% dieses Jahr
-          </p>
+        <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 cursor-glow shadow-l hover:scale-[1.02] transition-transform duration-200">
+          <p class="text-xs font-medium uppercase tracking-wider text-ink-muted mb-3">Portfolio-Wert</p>
+          <p class="text-3xl font-display font-bold text-ink mb-2">€25.430</p>
+          <p class="text-sm text-green-600 font-medium">+8,4% dieses Jahr</p>
         </div>
 
         <!-- Card 2 -->
-        <div class="soft-elevated rounded-2xl p-6">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-sm font-medium text-ink-muted">Diversifikation</h3>
-            <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10">
-              <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M13.8 3.1c2.6.5 4.1 2.2 4.1 4.2 0 1.7-1 3.4-2.9 4.1 2.5.8 3.8 2.4 3.8 4.5 0 3-2.5 5.1-6.3 5.1H6.8V3h5.4c.6 0 1.1 0 1.6.1Zm-2.8 6.9c1.9 0 3.1-.9 3.1-2.3 0-1.3-1.1-2.1-3-2.1H9.7v4.4h1.3Zm.5 8.1c2.2 0 3.6-1 3.6-2.6s-1.3-2.5-3.7-2.5H9.7v5.1h1.8Z"/>
-              </svg>
-            </span>
-          </div>
-          <p class="text-2xl font-display font-semibold text-ink mb-1">6 Assets</p>
-          <p class="text-xs text-ink-muted">Gut diversifiziert</p>
+        <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 cursor-glow shadow-l hover:scale-[1.02] transition-transform duration-200">
+          <p class="text-xs font-medium uppercase tracking-wider text-ink-muted mb-3">Diversifikation</p>
+          <p class="text-3xl font-display font-bold text-ink mb-2">6 Assets</p>
+          <p class="text-sm text-ink-muted font-medium">Gut diversifiziert</p>
         </div>
 
         <!-- Card 3 -->
-        <div class="soft-elevated rounded-2xl p-6">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-sm font-medium text-ink-muted">Rebalancing</h3>
-            <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10">
-              <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </span>
-          </div>
-          <p class="text-2xl font-display font-semibold text-ink mb-1">Q2 2025</p>
-          <p class="text-xs text-ink-muted">Nächster Check</p>
+        <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 cursor-glow shadow-l hover:scale-[1.02] transition-transform duration-200">
+          <p class="text-xs font-medium uppercase tracking-wider text-ink-muted mb-3">Rebalancing</p>
+          <p class="text-3xl font-display font-bold text-ink mb-2">Q2 2025</p>
+          <p class="text-sm text-ink-muted font-medium">Nächster Check</p>
         </div>
 
         <!-- Card 4 -->
-        <div class="soft-elevated rounded-2xl p-6">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-sm font-medium text-ink-muted">Risiko-Score</h3>
-            <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10">
-              <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-              </svg>
-            </span>
-          </div>
-          <p class="text-2xl font-display font-semibold text-ink mb-1">Moderat</p>
-          <p class="text-xs text-ink-muted">5/10 Risikostufe</p>
+        <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 cursor-glow shadow-l hover:scale-[1.02] transition-transform duration-200">
+          <p class="text-xs font-medium uppercase tracking-wider text-ink-muted mb-3">Risiko-Score</p>
+          <p class="text-3xl font-display font-bold text-ink mb-2">Moderat</p>
+          <p class="text-sm text-ink-muted font-medium">5/10 Risikostufe</p>
         </div>
       </div>
 
       <!-- Main Dashboard Grid -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         <!-- Portfolio Overview Chart -->
-        <div class="lg:col-span-2 soft-elevated rounded-2xl p-6">
+        <div class="lg:col-span-2 rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 cursor-glow shadow-l">
           <div class="flex items-center justify-between mb-6">
             <h2 class="text-lg font-semibold text-ink">Portfolio-Entwicklung</h2>
             <div class="flex gap-2">
-              <button class="px-3 py-1.5 text-xs font-medium rounded-lg bg-accent/10 text-accent">1J</button>
-              <button class="px-3 py-1.5 text-xs font-medium rounded-lg hover:bg-surface-100 text-ink-muted">5J</button>
-              <button class="px-3 py-1.5 text-xs font-medium rounded-lg hover:bg-surface-100 text-ink-muted">Max</button>
+              <button class="px-3 py-1.5 text-xs font-medium rounded-lg bg-accent text-white shadow-soft hover:scale-105 active:scale-95 transition-transform duration-150">1J</button>
+              <button class="px-3 py-1.5 text-xs font-medium rounded-lg border border-surface-200 hover:bg-surface-50 text-ink-muted soft-pressable">5J</button>
+              <button class="px-3 py-1.5 text-xs font-medium rounded-lg border border-surface-200 hover:bg-surface-50 text-ink-muted soft-pressable">Max</button>
             </div>
           </div>
           <div id="portfolio-chart" class="h-64"></div>
         </div>
 
         <!-- Asset Allocation -->
-        <div class="soft-elevated rounded-2xl p-6">
+        <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 cursor-glow shadow-l">
           <h2 class="text-lg font-semibold text-ink mb-6">Asset-Verteilung</h2>
           <div class="space-y-4">
             <div>
@@ -358,10 +334,10 @@
       <!-- Recent Activity & Actions -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <!-- Erinnerungen -->
-        <div class="soft-elevated rounded-2xl p-6">
+        <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 cursor-glow shadow-l">
           <h2 class="text-lg font-semibold text-ink mb-6">Aktuelle Erinnerungen</h2>
           <div class="space-y-4">
-            <div class="flex items-start gap-3 p-3 rounded-lg bg-surface-50 border border-surface-200">
+            <div class="flex items-start gap-3 p-3 rounded-lg bg-white ring-1 ring-inset ring-surface-200 hover:scale-[1.01] transition-transform duration-150">
               <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10 flex-shrink-0">
                 <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
@@ -372,7 +348,7 @@
                 <p class="text-xs text-ink-muted">Bitcoin-Anteil um 2% gestiegen</p>
               </div>
             </div>
-            <div class="flex items-start gap-3 p-3 rounded-lg bg-surface-50 border border-surface-200">
+            <div class="flex items-start gap-3 p-3 rounded-lg bg-white ring-1 ring-inset ring-surface-200 hover:scale-[1.01] transition-transform duration-150">
               <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10 flex-shrink-0">
                 <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
@@ -383,7 +359,7 @@
                 <p class="text-xs text-ink-muted">Quartalsbericht verfügbar</p>
               </div>
             </div>
-            <div class="flex items-start gap-3 p-3 rounded-lg bg-surface-50 border border-surface-200">
+            <div class="flex items-start gap-3 p-3 rounded-lg bg-white ring-1 ring-inset ring-surface-200 hover:scale-[1.01] transition-transform duration-150">
               <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10 flex-shrink-0">
                 <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
@@ -398,10 +374,10 @@
         </div>
 
         <!-- Quick Actions -->
-        <div class="soft-elevated rounded-2xl p-6">
+        <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 cursor-glow shadow-l">
           <h2 class="text-lg font-semibold text-ink mb-6">Schnellaktionen</h2>
           <div class="space-y-3">
-            <button class="w-full flex items-center justify-between p-4 rounded-xl border border-surface-200 hover:bg-surface-50 transition-all text-left">
+            <button class="w-full flex items-center justify-between p-4 rounded-xl bg-white ring-1 ring-inset ring-surface-200 soft-pressable text-left">
               <div class="flex items-center gap-3">
                 <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
                   <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -414,7 +390,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
               </svg>
             </button>
-            <button class="w-full flex items-center justify-between p-4 rounded-xl border border-surface-200 hover:bg-surface-50 transition-all text-left">
+            <button class="w-full flex items-center justify-between p-4 rounded-xl bg-white ring-1 ring-inset ring-surface-200 soft-pressable text-left">
               <div class="flex items-center gap-3">
                 <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
                   <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -427,7 +403,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
               </svg>
             </button>
-            <button class="w-full flex items-center justify-between p-4 rounded-xl border border-surface-200 hover:bg-surface-50 transition-all text-left">
+            <button class="w-full flex items-center justify-between p-4 rounded-xl bg-white ring-1 ring-inset ring-surface-200 soft-pressable text-left">
               <div class="flex items-center gap-3">
                 <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
                   <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -445,7 +421,7 @@
       </div>
 
       <!-- Holdings Table -->
-      <div class="soft-elevated rounded-2xl p-6">
+      <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 cursor-glow shadow-l">
         <h2 class="text-lg font-semibold text-ink mb-6">Meine Positionen</h2>
         <div class="overflow-x-auto">
           <table class="w-full text-sm text-left">
@@ -669,6 +645,59 @@
 
       const chart = new ApexCharts(document.getElementById('portfolio-chart'), options);
       chart.render();
+    });
+
+    // Cursor glow for interactive cards
+    const glowTargets = document.querySelectorAll('.cursor-glow');
+    glowTargets.forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+        el.style.setProperty('--my', `${e.clientY - r.top}px`);
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.removeProperty('--mx');
+        el.style.removeProperty('--my');
+      });
+    });
+
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const lightIcon = document.getElementById('theme-toggle-light-icon');
+    const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    const html = document.documentElement;
+
+    // Check for saved theme preference or default to light mode
+    const currentTheme = localStorage.getItem('theme') || 'light';
+
+    if (currentTheme === 'dark') {
+      html.classList.add('dark');
+      lightIcon.classList.add('rotate-90', 'scale-0');
+      lightIcon.classList.remove('rotate-0', 'scale-100');
+      darkIcon.classList.add('rotate-0', 'scale-100');
+      darkIcon.classList.remove('rotate-90', 'scale-0');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = html.classList.contains('dark');
+
+      if (isDark) {
+        // Switch to light mode
+        html.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+        lightIcon.classList.remove('rotate-90', 'scale-0');
+        lightIcon.classList.add('rotate-0', 'scale-100');
+        darkIcon.classList.remove('rotate-0', 'scale-100');
+        darkIcon.classList.add('rotate-90', 'scale-0');
+      } else {
+        // Switch to dark mode
+        html.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        lightIcon.classList.add('rotate-90', 'scale-0');
+        lightIcon.classList.remove('rotate-0', 'scale-100');
+        darkIcon.classList.add('rotate-0', 'scale-100');
+        darkIcon.classList.remove('rotate-90', 'scale-0');
+      }
     });
   </script>
 </body>
