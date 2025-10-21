@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="de" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Erinnerungen — Friedrich Beratung</title>
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}" />
+</head>
+<body class="bg-surface-50 text-ink font-sans antialiased">
+  {% set active_nav = 'reminders' %}
+  {% include 'dashboard/partials/sidebar.html' %}
+
+  <div id="main-content" class="md:ml-64">
+    <nav class="sticky top-0 z-40 bg-white border-b border-surface-200 px-4 py-3 shadow-soft">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 text-ink-muted rounded-lg md:hidden hover:bg-surface-100 focus:outline-none focus:ring-2 focus:ring-accent/40 soft-pressable">
+            <span class="sr-only">Menü öffnen</span>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+        <div class="flex items-center gap-2">
+          <img class="w-8 h-8 rounded-full shadow-m" src="https://ui-avatars.com/api/?name=User&background=0000af&color=fff" alt="User">
+          <span class="text-sm font-medium text-ink hidden sm:block">{{ current_user.name }}</span>
+        </div>
+      </div>
+    </nav>
+
+    <main class="p-4 md:p-6">
+      <!-- Header -->
+      <div class="mb-6">
+        <h1 class="text-2xl font-display font-bold text-ink">Erinnerungen</h1>
+        <p class="text-ink-muted mt-1">Wichtige Benachrichtigungen und Aufgaben</p>
+      </div>
+
+      <!-- Urgent Reminders -->
+      <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 shadow-l mb-6">
+        <h2 class="text-lg font-semibold text-ink mb-6">Dringend</h2>
+        <div class="space-y-4">
+          <div class="flex items-start gap-4 p-4 rounded-lg ring-1 ring-inset ring-orange-200 bg-orange-50">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-orange-500 text-white flex-shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+              </svg>
+            </span>
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-2">
+                <p class="font-semibold text-ink">Rebalancing empfohlen</p>
+                <span class="text-xs text-orange-600 font-medium">Heute</span>
+              </div>
+              <p class="text-sm text-ink-muted mb-3">Bitcoin-Anteil um 2% gestiegen. Bitte prüfen Sie Ihre Allokation und passen Sie ggf. an.</p>
+              <button class="text-sm font-medium text-accent hover:text-accent/80">Jetzt prüfen →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Reminders -->
+      <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 shadow-l mb-6">
+        <h2 class="text-lg font-semibold text-ink mb-6">Aktuelle Erinnerungen</h2>
+        <div class="space-y-4">
+          <div class="flex items-start gap-4 p-4 rounded-lg ring-1 ring-inset ring-surface-200 hover:bg-surface-50 transition-colors">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 flex-shrink-0">
+              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+            </span>
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-2">
+                <p class="font-semibold text-ink">Neuer Marktbericht</p>
+                <span class="text-xs text-ink-muted">Vor 2 Tagen</span>
+              </div>
+              <p class="text-sm text-ink-muted mb-3">Ihr Q1 2025 Marktbericht ist verfügbar. Überblick über Performance und aktuelle Entwicklungen.</p>
+              <button class="text-sm font-medium text-accent hover:text-accent/80">Bericht öffnen →</button>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 rounded-lg ring-1 ring-inset ring-surface-200 hover:bg-surface-50 transition-colors">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 flex-shrink-0">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+            </span>
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-2">
+                <p class="font-semibold text-ink">Blueprint aktualisiert</p>
+                <span class="text-xs text-ink-muted">Vor 3 Tagen</span>
+              </div>
+              <p class="text-sm text-ink-muted mb-3">Ihr Portfolio-Blueprint wurde basierend auf aktuellen Marktdaten aktualisiert.</p>
+              <button class="text-sm font-medium text-accent hover:text-accent/80">Details ansehen →</button>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 rounded-lg ring-1 ring-inset ring-surface-200 hover:bg-surface-50 transition-colors">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 flex-shrink-0">
+              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </span>
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-2">
+                <p class="font-semibold text-ink">Nächstes Rebalancing Q2 2025</p>
+                <span class="text-xs text-ink-muted">in 45 Tagen</span>
+              </div>
+              <p class="text-sm text-ink-muted mb-3">Ihr nächster empfohlener Rebalancing-Termin ist im April 2025.</p>
+              <button class="text-sm font-medium text-accent hover:text-accent/80">Termin merken →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Completed Reminders -->
+      <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 shadow-l">
+        <h2 class="text-lg font-semibold text-ink mb-6">Erledigt</h2>
+        <div class="space-y-3">
+          <div class="flex items-center gap-3 p-3 rounded-lg bg-surface-50 opacity-60">
+            <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <div class="flex-1">
+              <p class="text-sm font-medium text-ink">Portfolio-Update Q4 2024 angesehen</p>
+              <p class="text-xs text-ink-muted mt-1">Vor 1 Woche</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 p-3 rounded-lg bg-surface-50 opacity-60">
+            <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <div class="flex-1">
+              <p class="text-sm font-medium text-ink">Rebalancing Q1 2025 durchgeführt</p>
+              <p class="text-xs text-ink-muted mt-1">Vor 2 Wochen</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.js"></script>
+  <script src="{{ url_for('static', filename='js/navbar/sidebar.js') }}"></script>
+</body>
+</html>

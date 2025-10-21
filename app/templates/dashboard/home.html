@@ -17,187 +17,17 @@
   <!-- Flowbite -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.css" rel="stylesheet" />
 
-  <style>
-    :root { color-scheme: light; }
-    .dark { color-scheme: dark; }
-    
-    /* Smooth sidebar transitions */
-    #logo-sidebar {
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    /* Smooth backdrop transitions */
-    [drawer-backdrop] {
-      transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    /* Prevent content shift on mobile */
-    @media (max-width: 767px) {
-      body {
-        overflow-x: hidden;
-      }
-    }
-    
-    /* Collapsible sidebar on desktop */
-    @media (min-width: 768px) {
-      #logo-sidebar {
-        width: 80px;
-      }
-      
-      #logo-sidebar:hover {
-        width: 16rem;
-      }
-      
-      /* Make each nav item a fixed square in collapsed state */
-      #logo-sidebar ul li a {
-        height: 56px;                /* square hitbox */
-        justify-content: center;     /* center icon */
-        padding: 0.75rem;            /* consistent inner padding */
-      }
-      
-      #logo-sidebar:hover ul li a {
-        justify-content: flex-start; /* align left when expanded */
-        gap: 0.75rem;                /* spacing via gap, not margins */
-        padding: 0.75rem;
-      }
-      
-      /* Smoothly reveal/hide label without snap */
-      #logo-sidebar .sidebar-text {
-        display: inline-block;
-        margin-left: 0 !important;   /* neutralize ml-3 in markup */
-        max-width: 0;                /* collapse width smoothly */
-        opacity: 0;
-        overflow: hidden;
-        white-space: nowrap;
-        transition: max-width 0.28s ease, opacity 0.18s ease;
-      }
-      
-      #logo-sidebar:hover .sidebar-text {
-        max-width: 160px;            /* enough for longest label */
-        opacity: 1;
-        transition-delay: 0.02s, 0s; /* let justify change first */
-      }
-
-      /* Notification badge: do not affect centering when collapsed */
-      #logo-sidebar .sidebar-badge {
-        display: none;                /* remove from layout when collapsed */
-      }
-      #logo-sidebar:hover .sidebar-badge {
-        display: inline-flex;         /* appear only in expanded state */
-        margin-left: auto;            /* push to the far right */
-        flex: none;                   /* prevent flex squeezing */
-        opacity: 1;
-        transition: opacity 0.18s ease; /* match label speed */
-      }
-      
-      #logo-sidebar .logo-text {
-        opacity: 0;
-        width: 0;
-        overflow: hidden;
-        transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      
-      #logo-sidebar:hover .logo-text {
-        opacity: 1;
-        width: auto;
-        transition-delay: 0.1s;
-      }
-      
-      #main-content {
-        margin-left: 80px;
-        transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      
-      #logo-sidebar:hover ~ #main-content {
-        margin-left: 16rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}" />
 </head>
 
-<body class="bg-surface-50 dark:bg-surface-100 text-ink dark:text-ink-dark font-sans antialiased transition-colors duration-300">
-  <!-- Sidebar -->
-  <aside id="logo-sidebar" class="fixed top-0 left-0 z-50 w-64 h-screen transition-transform -translate-x-full md:translate-x-0" aria-label="Sidebar">
-    <div class="h-full px-3 pt-4 pb-24 md:pb-4 overflow-y-auto bg-white dark:bg-surface-100 border-r border-surface-200 dark:border-surface-200 flex flex-col transition-colors duration-300">
-      <!-- Logo -->
-      <div class="flex items-center gap-2 px-3 py-4 mb-6">
-        <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-black text-white text-xs flex-shrink-0">✦</span>
-        <span class="font-display font-semibold text-lg text-ink logo-text">Friedrich</span>
-      </div>
-
-      <!-- Navigation -->
-      <ul class="space-y-2 font-medium flex-1">
-        <li>
-          <a href="#" class="flex items-center p-3 text-ink rounded-xl bg-accent/10 ring-1 ring-accent/20">
-            <svg class="w-5 h-5 text-accent flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-            </svg>
-            <span class="ml-3 text-sm sidebar-text">Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center p-3 text-ink-muted hover:bg-surface-100 rounded-xl transition-colors">
-            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-            </svg>
-            <span class="ml-3 text-sm sidebar-text">Mein Portfolio</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center p-3 text-ink-muted hover:bg-surface-100 rounded-xl transition-colors">
-            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-            </svg>
-            <span class="ml-3 text-sm sidebar-text">Blueprint</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center p-3 text-ink-muted hover:bg-surface-100 rounded-xl transition-colors">
-            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
-            </svg>
-            <span class="ml-3 text-sm sidebar-text">Erinnerungen</span>
-            <span class="inline-flex items-center justify-center w-5 h-5 ml-auto text-xs font-semibold text-white bg-accent rounded-full sidebar-badge">3</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center p-3 text-ink-muted hover:bg-surface-100 rounded-xl transition-colors">
-            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-            </svg>
-            <span class="ml-3 text-sm sidebar-text">Partner</span>
-          </a>
-        </li>
-      </ul>
-
-      <!-- Bottom section -->
-      <div class="mt-auto pt-6 border-t border-surface-200">
-        <ul class="space-y-2 font-medium">
-          <li>
-            <a href="#" class="flex items-center p-3 text-ink-muted hover:bg-surface-100 rounded-xl transition-colors">
-              <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-              </svg>
-              <span class="ml-3 text-sm sidebar-text">Einstellungen</span>
-            </a>
-          </li>
-          <li>
-            <a href="{{ url_for('main.index') }}" class="flex items-center p-3 text-ink-muted hover:bg-surface-100 rounded-xl transition-colors">
-              <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-              </svg>
-              <span class="ml-3 text-sm sidebar-text">Zur Startseite</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </aside>
+<body class="bg-surface-50 text-ink font-sans antialiased transition-colors duration-300">
+  {% set active_nav = 'home' %}
+  {% include 'dashboard/partials/sidebar.html' %}
 
   <!-- Main Content -->
   <div id="main-content" class="md:ml-64">
     <!-- Top navbar -->
-    <nav class="sticky top-0 z-40 bg-white dark:bg-surface-100 border-b border-surface-200 dark:border-surface-200 px-4 py-3 shadow-soft transition-colors duration-300">
+    <nav class="sticky top-0 z-40 bg-white border-b border-surface-200 px-4 py-3 shadow-soft transition-colors duration-300">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
           <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 text-ink-muted rounded-lg md:hidden hover:bg-surface-100 focus:outline-none focus:ring-2 focus:ring-accent/40 soft-pressable">
@@ -209,14 +39,6 @@
         </div>
 
         <div class="flex items-center gap-3">
-          <button id="theme-toggle" type="button" class="p-2 text-ink-muted hover:bg-surface-100 rounded-lg soft-pressable relative overflow-hidden">
-            <svg id="theme-toggle-light-icon" class="w-5 h-5 transition-all duration-300 rotate-0 scale-100" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
-            </svg>
-            <svg id="theme-toggle-dark-icon" class="w-5 h-5 transition-all duration-300 absolute inset-0 m-auto rotate-90 scale-0" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-            </svg>
-          </button>
           <button type="button" class="p-2 text-ink-muted hover:bg-surface-100 rounded-lg soft-pressable">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
@@ -480,80 +302,17 @@
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="{{ url_for('static', filename='js/navbar/sidebar.js') }}"></script>
   <script>
-    // Responsive sidebar handling with Flowbite
-    document.addEventListener('DOMContentLoaded', function() {
-      const sidebar = document.getElementById('logo-sidebar');
-      let isDesktop = window.innerWidth >= 768;
-      let wasDesktop = isDesktop;
-      
-      function handleSidebarResponsive() {
-        isDesktop = window.innerWidth >= 768;
-        
-        if (isDesktop) {
-          // Desktop: always show sidebar
-          sidebar.classList.remove('-translate-x-full');
-          sidebar.classList.add('translate-x-0');
-          // Smoothly hide backdrop on desktop
-          const backdrop = document.querySelector('[drawer-backdrop]');
-          if (backdrop) {
-            backdrop.style.opacity = '0';
-            setTimeout(() => {
-              backdrop.style.display = 'none';
-            }, 300);
-          }
-        } else if (wasDesktop && !isDesktop) {
-          // Just switched from desktop to mobile: hide sidebar
-          sidebar.classList.add('-translate-x-full');
-          sidebar.classList.remove('translate-x-0');
-        }
-        
-        wasDesktop = isDesktop;
-      }
-      
-      // Initial setup
-      handleSidebarResponsive();
-      
-      // Handle resize with debounce
-      let resizeTimer;
-      window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(handleSidebarResponsive, 100);
-      });
-      
-      // Improve backdrop transitions on mobile
-      const backdropObserver = new MutationObserver(function() {
-        if (!isDesktop) {
-          const backdrop = document.querySelector('[drawer-backdrop]');
-          if (backdrop) {
-            // Ensure smooth transitions
-            if (backdrop.style.display !== 'none') {
-              backdrop.style.opacity = '1';
-            }
-          }
-        }
-      });
-      
-      // Observe body for backdrop insertion
-      backdropObserver.observe(document.body, { 
-        childList: true, 
-        subtree: true 
-      });
-    });
-    
-    // Portfolio Chart with ApexCharts (Flowbite)
+    // Portfolio Chart with ApexCharts (static light theme)
     document.addEventListener('DOMContentLoaded', function() {
       const options = {
         chart: {
           height: '256px',
           type: 'area',
           fontFamily: 'Inter, ui-sans-serif, system-ui',
-          toolbar: {
-            show: false
-          },
-          zoom: {
-            enabled: false
-          }
+          toolbar: { show: false },
+          zoom: { enabled: false }
         },
         series: [{
           name: 'Portfolio-Wert',
@@ -572,77 +331,29 @@
             stops: [0, 100]
           }
         },
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-          curve: 'smooth',
-          width: 3,
-          colors: ['#0000af']
-        },
-        grid: {
-          borderColor: '#F1F5F9',
-          strokeDashArray: 5,
-          yaxis: {
-            lines: {
-              show: true
-            }
-          }
-        },
+        dataLabels: { enabled: false },
+        stroke: { curve: 'smooth', width: 3, colors: ['#0000af'] },
+        grid: { borderColor: '#F1F5F9', strokeDashArray: 5, yaxis: { lines: { show: true } } },
         xaxis: {
           categories: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
-          axisBorder: {
-            color: '#E2E8F0'
-          },
-          axisTicks: {
-            color: '#E2E8F0'
-          },
-          labels: {
-            style: {
-              colors: '#475569',
-              fontSize: '12px',
-              fontWeight: 500
-            }
-          }
+          axisBorder: { color: '#E2E8F0' },
+          axisTicks: { color: '#E2E8F0' },
+          labels: { style: { colors: '#475569', fontSize: '12px', fontWeight: 500 } }
         },
         yaxis: {
           labels: {
-            style: {
-              colors: '#475569',
-              fontSize: '12px',
-              fontWeight: 500
-            },
-            formatter: function(value) {
-              return '€' + (value / 1000) + 'k';
-            }
+            style: { colors: '#475569', fontSize: '12px', fontWeight: 500 },
+            formatter: function(value) { return '€' + (value / 1000) + 'k'; }
           }
         },
         tooltip: {
           theme: 'light',
-          x: {
-            show: true
-          },
-          y: {
-            formatter: function(value) {
-              return '€' + value.toLocaleString('de-DE');
-            }
-          },
-          style: {
-            fontSize: '12px',
-            fontFamily: 'Inter, ui-sans-serif, system-ui'
-          }
+          x: { show: true },
+          y: { formatter: function(value) { return '€' + value.toLocaleString('de-DE'); } },
+          style: { fontSize: '12px', fontFamily: 'Inter, ui-sans-serif, system-ui' }
         },
-        markers: {
-          size: 0,
-          colors: ['#0000af'],
-          strokeColors: '#ffffff',
-          strokeWidth: 2,
-          hover: {
-            size: 6
-          }
-        }
+        markers: { size: 0, colors: ['#0000af'], strokeColors: '#ffffff', strokeWidth: 2, hover: { size: 6 } }
       };
-
       const chart = new ApexCharts(document.getElementById('portfolio-chart'), options);
       chart.render();
     });
@@ -659,45 +370,6 @@
         el.style.removeProperty('--mx');
         el.style.removeProperty('--my');
       });
-    });
-
-    // Theme toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const lightIcon = document.getElementById('theme-toggle-light-icon');
-    const darkIcon = document.getElementById('theme-toggle-dark-icon');
-    const html = document.documentElement;
-
-    // Check for saved theme preference or default to light mode
-    const currentTheme = localStorage.getItem('theme') || 'light';
-
-    if (currentTheme === 'dark') {
-      html.classList.add('dark');
-      lightIcon.classList.add('rotate-90', 'scale-0');
-      lightIcon.classList.remove('rotate-0', 'scale-100');
-      darkIcon.classList.add('rotate-0', 'scale-100');
-      darkIcon.classList.remove('rotate-90', 'scale-0');
-    }
-
-    themeToggle.addEventListener('click', () => {
-      const isDark = html.classList.contains('dark');
-
-      if (isDark) {
-        // Switch to light mode
-        html.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-        lightIcon.classList.remove('rotate-90', 'scale-0');
-        lightIcon.classList.add('rotate-0', 'scale-100');
-        darkIcon.classList.remove('rotate-0', 'scale-100');
-        darkIcon.classList.add('rotate-90', 'scale-0');
-      } else {
-        // Switch to dark mode
-        html.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-        lightIcon.classList.add('rotate-90', 'scale-0');
-        lightIcon.classList.remove('rotate-0', 'scale-100');
-        darkIcon.classList.add('rotate-0', 'scale-100');
-        darkIcon.classList.remove('rotate-90', 'scale-0');
-      }
     });
   </script>
 </body>

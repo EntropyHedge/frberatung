@@ -11,6 +11,26 @@ def index():
 @main_bp.route('/dashboard')
 def dashboard():
     return render_template('dashboard/home.html', current_user=current_user, year=datetime.now().year)
+
+@main_bp.route('/dashboard/portfolio')
+def dashboard_portfolio():
+    return render_template('dashboard/portfolio.html', current_user=current_user, year=datetime.now().year)
+
+@main_bp.route('/dashboard/blueprint')
+def dashboard_blueprint():
+    return render_template('dashboard/blueprint.html', current_user=current_user, year=datetime.now().year)
+
+@main_bp.route('/dashboard/reminders')
+def dashboard_reminders():
+    return render_template('dashboard/reminders.html', current_user=current_user, year=datetime.now().year)
+
+@main_bp.route('/dashboard/partners')
+def dashboard_partners():
+    return render_template('dashboard/partners.html', current_user=current_user, year=datetime.now().year)
+
+@main_bp.route('/dashboard/settings')
+def dashboard_settings():
+    return render_template('dashboard/settings.html', current_user=current_user, year=datetime.now().year)
     
 @main_bp.route('/charts')
 @login_required

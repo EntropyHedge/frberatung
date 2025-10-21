@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="de" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Partner — Friedrich Beratung</title>
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}" />
+</head>
+<body class="bg-surface-50 text-ink font-sans antialiased">
+  {% set active_nav = 'partners' %}
+  {% include 'dashboard/partials/sidebar.html' %}
+
+  <div id="main-content" class="md:ml-64">
+    <nav class="sticky top-0 z-40 bg-white border-b border-surface-200 px-4 py-3 shadow-soft">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 text-ink-muted rounded-lg md:hidden hover:bg-surface-100 focus:outline-none focus:ring-2 focus:ring-accent/40 soft-pressable">
+            <span class="sr-only">Menü öffnen</span>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+        <div class="flex items-center gap-2">
+          <img class="w-8 h-8 rounded-full shadow-m" src="https://ui-avatars.com/api/?name=User&background=0000af&color=fff" alt="User">
+          <span class="text-sm font-medium text-ink hidden sm:block">{{ current_user.name }}</span>
+        </div>
+      </div>
+    </nav>
+
+    <main class="p-4 md:p-6">
+      <!-- Header -->
+      <div class="mb-6">
+        <h1 class="text-2xl font-display font-bold text-ink">Partner</h1>
+        <p class="text-ink-muted mt-1">Empfohlene Anbieter für Ihre Investments</p>
+      </div>
+
+      <!-- Broker -->
+      <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 shadow-l mb-6">
+        <h2 class="text-lg font-semibold text-ink mb-6">Broker & Depots</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="p-5 rounded-lg ring-1 ring-inset ring-surface-200 hover:ring-accent/40 transition-all">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h3 class="font-semibold text-ink text-lg">Trade Republic</h3>
+                <p class="text-sm text-ink-muted mt-1">Für ETF & Krypto</p>
+              </div>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Empfohlen</span>
+            </div>
+            <p class="text-sm text-ink-muted mb-4">Günstige Gebühren, einfache App, große Auswahl an ETFs und Bitcoin-ETPs.</p>
+            <div class="flex items-center gap-2 text-xs text-ink-muted mb-4">
+              <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>€1 Ordergebühr • Kostenlose Sparpläne</span>
+            </div>
+            <a href="#" class="inline-flex items-center px-4 py-2 rounded-lg bg-accent text-white text-sm font-medium hover:bg-accent/90 transition-colors">
+              Mehr erfahren
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+
+          <div class="p-5 rounded-lg ring-1 ring-inset ring-surface-200 hover:ring-accent/40 transition-all">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h3 class="font-semibold text-ink text-lg">Scalable Capital</h3>
+                <p class="text-sm text-ink-muted mt-1">Für ETFs & Sparpläne</p>
+              </div>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Alternative</span>
+            </div>
+            <p class="text-sm text-ink-muted mb-4">Große ETF-Auswahl mit kostenlosen Sparplänen und Prime-Broker-Optionen.</p>
+            <div class="flex items-center gap-2 text-xs text-ink-muted mb-4">
+              <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>Ab €0 • 2.700+ kostenlose ETF-Sparpläne</span>
+            </div>
+            <a href="#" class="inline-flex items-center px-4 py-2 rounded-lg border border-surface-200 text-ink text-sm font-medium hover:bg-surface-50 transition-colors">
+              Mehr erfahren
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gold & Edelmetalle -->
+      <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 shadow-l mb-6">
+        <h2 class="text-lg font-semibold text-ink mb-6">Gold & Edelmetalle</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="p-5 rounded-lg ring-1 ring-inset ring-surface-200 hover:ring-accent/40 transition-all">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h3 class="font-semibold text-ink text-lg">pro aurum</h3>
+                <p class="text-sm text-ink-muted mt-1">Physisches Gold</p>
+              </div>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Empfohlen</span>
+            </div>
+            <p class="text-sm text-ink-muted mb-4">Etablierter Edelmetallhändler mit Filialen, Schließfächern und Online-Shop.</p>
+            <div class="flex items-center gap-2 text-xs text-ink-muted mb-4">
+              <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>Physische Lieferung • Schließfachservice</span>
+            </div>
+            <a href="#" class="inline-flex items-center px-4 py-2 rounded-lg bg-accent text-white text-sm font-medium hover:bg-accent/90 transition-colors">
+              Mehr erfahren
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+
+          <div class="p-5 rounded-lg ring-1 ring-inset ring-surface-200 hover:ring-accent/40 transition-all">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h3 class="font-semibold text-ink text-lg">Xetra-Gold ETC</h3>
+                <p class="text-sm text-ink-muted mt-1">Gold als Wertpapier</p>
+              </div>
+            </div>
+            <p class="text-sm text-ink-muted mb-4">Börslich handelbarer Gold-ETC mit physischer Hinterlegung.</p>
+            <div class="flex items-center gap-2 text-xs text-ink-muted mb-4">
+              <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>Über Broker handelbar • Physisch besichert</span>
+            </div>
+            <a href="#" class="inline-flex items-center px-4 py-2 rounded-lg border border-surface-200 text-ink text-sm font-medium hover:bg-surface-50 transition-colors">
+              Mehr erfahren
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bitcoin -->
+      <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 shadow-l">
+        <h2 class="text-lg font-semibold text-ink mb-6">Bitcoin</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="p-5 rounded-lg ring-1 ring-inset ring-surface-200 hover:ring-accent/40 transition-all">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h3 class="font-semibold text-ink text-lg">iShares Bitcoin ETP</h3>
+                <p class="text-sm text-ink-muted mt-1">Bitcoin als Wertpapier</p>
+              </div>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Empfohlen</span>
+            </div>
+            <p class="text-sm text-ink-muted mb-4">Regulierter Bitcoin-ETP, handelbar über Ihr Depot bei Trade Republic oder Scalable.</p>
+            <div class="flex items-center gap-2 text-xs text-ink-muted mb-4">
+              <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>Über Broker • Reguliert • Einfacher Handel</span>
+            </div>
+            <a href="#" class="inline-flex items-center px-4 py-2 rounded-lg bg-accent text-white text-sm font-medium hover:bg-accent/90 transition-colors">
+              Mehr erfahren
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+
+          <div class="p-5 rounded-lg ring-1 ring-inset ring-surface-200 hover:ring-accent/40 transition-all">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h3 class="font-semibold text-ink text-lg">Bitpanda</h3>
+                <p class="text-sm text-ink-muted mt-1">Direkte Bitcoin-Verwahrung</p>
+              </div>
+            </div>
+            <p class="text-sm text-ink-muted mb-4">Österreichische Börse für direkten Bitcoin-Kauf mit Verwahrung und Sparplan.</p>
+            <div class="flex items-center gap-2 text-xs text-ink-muted mb-4">
+              <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>Echte BTC • Sparpläne • Reguliert in EU</span>
+            </div>
+            <a href="#" class="inline-flex items-center px-4 py-2 rounded-lg border border-surface-200 text-ink text-sm font-medium hover:bg-surface-50 transition-colors">
+              Mehr erfahren
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.js"></script>
+  <script src="{{ url_for('static', filename='js/navbar/sidebar.js') }}"></script>
+</body>
+</html>

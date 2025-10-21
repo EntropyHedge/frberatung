@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="de" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Einstellungen — Friedrich Beratung</title>
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}" />
+</head>
+<body class="bg-surface-50 text-ink font-sans antialiased">
+  {% set active_nav = 'settings' %}
+  {% include 'dashboard/partials/sidebar.html' %}
+
+  <div id="main-content" class="md:ml-64">
+    <nav class="sticky top-0 z-40 bg-white border-b border-surface-200 px-4 py-3 shadow-soft">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 text-ink-muted rounded-lg md:hidden hover:bg-surface-100 focus:outline-none focus:ring-2 focus:ring-accent/40 soft-pressable">
+            <span class="sr-only">Menü öffnen</span>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+        <div class="flex items-center gap-2">
+          <img class="w-8 h-8 rounded-full shadow-m" src="https://ui-avatars.com/api/?name=User&background=0000af&color=fff" alt="User">
+          <span class="text-sm font-medium text-ink hidden sm:block">{{ current_user.name }}</span>
+        </div>
+      </div>
+    </nav>
+
+    <main class="p-4 md:p-6">
+      <!-- Header -->
+      <div class="mb-6">
+        <h1 class="text-2xl font-display font-bold text-ink">Einstellungen</h1>
+        <p class="text-ink-muted mt-1">Verwalten Sie Ihr Konto und Ihre Präferenzen</p>
+      </div>
+
+      <!-- Profile Settings -->
+      <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 shadow-l mb-6">
+        <h2 class="text-lg font-semibold text-ink mb-6">Profil</h2>
+        <div class="space-y-6">
+          <div>
+            <label class="block text-sm font-medium text-ink mb-2">Name</label>
+            <input type="text" value="{{ current_user.name }}" class="w-full px-4 py-2 rounded-lg border border-surface-200 focus:ring-2 focus:ring-accent/40 focus:border-accent outline-none transition-colors">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-ink mb-2">E-Mail</label>
+            <input type="email" value="{{ current_user.email if current_user.email else 'user@example.com' }}" class="w-full px-4 py-2 rounded-lg border border-surface-200 focus:ring-2 focus:ring-accent/40 focus:border-accent outline-none transition-colors">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-ink mb-2">Telefon</label>
+            <input type="tel" value="+49 123 456 7890" class="w-full px-4 py-2 rounded-lg border border-surface-200 focus:ring-2 focus:ring-accent/40 focus:border-accent outline-none transition-colors">
+          </div>
+          <div class="flex justify-end">
+            <button class="px-6 py-2 rounded-lg bg-accent text-white font-medium hover:bg-accent/90 transition-colors">
+              Änderungen speichern
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notification Preferences -->
+      <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 shadow-l mb-6">
+        <h2 class="text-lg font-semibold text-ink mb-6">Benachrichtigungen</h2>
+        <div class="space-y-4">
+          <div class="flex items-center justify-between p-4 rounded-lg border border-surface-200">
+            <div>
+              <p class="font-medium text-ink">Rebalancing-Erinnerungen</p>
+              <p class="text-sm text-ink-muted mt-1">Erhalten Sie Benachrichtigungen bei empfohlenem Rebalancing</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" checked class="sr-only peer">
+              <div class="w-11 h-6 bg-surface-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-surface-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-accent"></div>
+            </label>
+          </div>
+          <div class="flex items-center justify-between p-4 rounded-lg border border-surface-200">
+            <div>
+              <p class="font-medium text-ink">Marktberichte</p>
+              <p class="text-sm text-ink-muted mt-1">Quartalsweise Marktberichte und Updates</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" checked class="sr-only peer">
+              <div class="w-11 h-6 bg-surface-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-surface-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-accent"></div>
+            </label>
+          </div>
+          <div class="flex items-center justify-between p-4 rounded-lg border border-surface-200">
+            <div>
+              <p class="font-medium text-ink">Portfolio-Updates</p>
+              <p class="text-sm text-ink-muted mt-1">Wöchentliche Performance-Updates per E-Mail</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" class="sr-only peer">
+              <div class="w-11 h-6 bg-surface-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-surface-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-accent"></div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Security Settings -->
+      <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 shadow-l mb-6">
+        <h2 class="text-lg font-semibold text-ink mb-6">Sicherheit</h2>
+        <div class="space-y-4">
+          <button class="w-full flex items-center justify-between p-4 rounded-lg border border-surface-200 hover:bg-surface-50 transition-colors text-left">
+            <div>
+              <p class="font-medium text-ink">Passwort ändern</p>
+              <p class="text-sm text-ink-muted mt-1">Zuletzt geändert vor 3 Monaten</p>
+            </div>
+            <svg class="w-5 h-5 text-ink-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+          <button class="w-full flex items-center justify-between p-4 rounded-lg border border-surface-200 hover:bg-surface-50 transition-colors text-left">
+            <div>
+              <p class="font-medium text-ink">Zwei-Faktor-Authentifizierung</p>
+              <p class="text-sm text-ink-muted mt-1">Zusätzlicher Schutz für Ihr Konto</p>
+            </div>
+            <svg class="w-5 h-5 text-ink-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Subscription & Billing -->
+      <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 shadow-l mb-6">
+        <h2 class="text-lg font-semibold text-ink mb-6">Abo & Abrechnung</h2>
+        <div class="p-4 rounded-lg bg-accent/5 border border-accent/20 mb-4">
+          <div class="flex items-start justify-between">
+            <div>
+              <p class="font-semibold text-ink">Jahres-Abo aktiv</p>
+              <p class="text-sm text-ink-muted mt-1">Nächste Abrechnung am 15. Januar 2026</p>
+              <p class="text-sm font-medium text-accent mt-2">€999 / Jahr</p>
+            </div>
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Aktiv</span>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <button class="px-4 py-2 rounded-lg border border-surface-200 text-ink text-sm font-medium hover:bg-surface-50 transition-colors">
+            Zahlungsmethode ändern
+          </button>
+          <button class="px-4 py-2 rounded-lg border border-surface-200 text-ink text-sm font-medium hover:bg-surface-50 transition-colors">
+            Rechnungen ansehen
+          </button>
+        </div>
+      </div>
+
+      <!-- Danger Zone -->
+      <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-red-200 shadow-l">
+        <h2 class="text-lg font-semibold text-red-600 mb-4">Gefahrenzone</h2>
+        <div class="space-y-3">
+          <button class="w-full flex items-center justify-between p-4 rounded-lg border border-red-200 hover:bg-red-50 transition-colors text-left">
+            <div>
+              <p class="font-medium text-red-600">Abo kündigen</p>
+              <p class="text-sm text-ink-muted mt-1">Beenden Sie Ihr Abo zum Ende der Laufzeit</p>
+            </div>
+            <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+          <button class="w-full flex items-center justify-between p-4 rounded-lg border border-red-200 hover:bg-red-50 transition-colors text-left">
+            <div>
+              <p class="font-medium text-red-600">Konto löschen</p>
+              <p class="text-sm text-ink-muted mt-1">Alle Daten werden unwiderruflich gelöscht</p>
+            </div>
+            <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.js"></script>
+  <script src="{{ url_for('static', filename='js/navbar/sidebar.js') }}"></script>
+</body>
+</html>
