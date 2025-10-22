@@ -8,12 +8,19 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/onboarding.css') }}" />
-  <style>:root { color-scheme: light; }</style>
+  <style>
+    :root { color-scheme: light; }
+    .step-content { display: none; }
+    .step-content.active { display: block; animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .step-indicator { opacity: 0.4; transition: all 0.3s ease; }
+    .step-indicator.active { opacity: 1; transform: scale(1.05); }
+    .step-indicator.completed { opacity: 0.7; }
+  </style>
 </head>
 
 <body class="bg-white text-ink selection:bg-accent/10 selection:text-ink font-sans">
@@ -24,254 +31,568 @@
 
   <main id="main" class="max-w-7xl mx-auto px-4 md:px-6">
     <section class="pt-20 md:pt-28 pb-10">
-      <div class="max-w-3xl">
-        <h1 class="font-display text-4xl md:text-5xl tracking-tight leading-tight text-ink">In wenigen Minuten zu Ihrem persönlichen Risiko‑Profil</h1>
-        <p class="mt-4 text-ink-muted text-base md:text-lg">Beantworten Sie ein paar einfache Fragen. Wir übersetzen diese in einen klaren Risiko‑Score (0–100) und leiten daraus Ihren Portfolio‑Blueprint ab.</p>
-        <div class="mt-6 flex flex-wrap gap-3 text-sm text-ink-muted">
-          <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-50 ring-1 ring-surface-200">⏱️ 10–15 Minuten</span>
-          <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-50 ring-1 ring-surface-200">🔒 Datenschutz‑konform</span>
-          <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-50 ring-1 ring-surface-200">📄 Keine Fachkenntnisse nötig</span>
+      <div class="max-w-4xl mx-auto">
+        <h1 class="font-display text-4xl md:text-5xl tracking-tight leading-tight text-ink text-center">In wenigen Minuten zu Ihrem persönlichen Risiko‑Profil</h1>
+        <p class="mt-4 text-ink-muted text-base md:text-lg text-center max-w-2xl mx-auto">Beantworten Sie ein paar einfache Fragen. Wir übersetzen diese in einen klaren Risiko‑Score (0–100) und leiten daraus Ihren Portfolio‑Blueprint ab.</p>
+        <div class="mt-6 flex flex-wrap justify-center gap-3 text-sm text-ink-muted">
+          <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-50 ring-1 ring-surface-200">
+            <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            10–15 Minuten
+          </span>
+          <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-50 ring-1 ring-surface-200">
+            <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            Datenschutz‑konform
+          </span>
+          <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-50 ring-1 ring-surface-200">
+            <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Keine Fachkenntnisse nötig
+          </span>
         </div>
       </div>
     </section>
 
-    <section class="grid lg:grid-cols-3 gap-8 pb-24">
-      <!-- Form -->
-      <form id="onboarding-form" class="lg:col-span-2 space-y-8">
-        <!-- Profile -->
-        <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200">
-          <div class="flex items-start justify-between gap-4 mb-5">
-            <div>
-              <h2 class="text-lg font-semibold">Über Sie</h2>
-              <p class="text-sm text-ink-muted mt-1">Alter, Einkommen und Rücklagen – die Basis für solide Empfehlungen.</p>
-            </div>
-            <span class="inline-flex h-8 px-3 items-center rounded-md bg-accent/10 text-accent text-xs font-semibold ring-1 ring-accent/20">Schritt 1</span>
+    <section class="pb-24">
+      <div class="max-w-4xl mx-auto">
+        <!-- Progress Indicator -->
+        <div class="mb-8">
+          <div class="flex items-center justify-center gap-2 mb-4" id="step-indicators">
+            <!-- Generated by JS -->
           </div>
-          <div class="grid sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium mb-1">Wie alt sind Sie?</label>
-              <input type="number" min="0" step="1" class="w-full rounded-xl border border-surface-200 px-3.5 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30" name="age" placeholder="z. B. 35" required />
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1">Geplantes Rentenalter</label>
-              <input type="number" min="0" step="1" class="w-full rounded-xl border border-surface-200 px-3.5 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30" name="retirement_age" placeholder="z. B. 65" required />
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1">Investierbares Vermögen</label>
-              <div class="relative">
-                <input type="number" min="0" step="0.01" class="w-full rounded-xl border border-surface-200 pl-3.5 pr-12 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30" name="investable_assets" placeholder="z. B. 120000" required />
-                <span class="absolute right-3 top-2.5 text-sm text-ink-muted">€</span>
-              </div>
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1">Vermögen gesamt</label>
-              <div class="relative">
-                <input type="number" min="0" step="0.01" class="w-full rounded-xl border border-surface-200 pl-3.5 pr-12 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30" name="net_worth" placeholder="z. B. 250000" required />
-                <span class="absolute right-3 top-2.5 text-sm text-ink-muted">€</span>
-              </div>
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1">Nettoeinkommen p.a.</label>
-              <div class="relative">
-                <input type="number" min="0" step="0.01" class="w-full rounded-xl border border-surface-200 pl-3.5 pr-12 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30" name="annual_income_after_tax" placeholder="z. B. 65000" required />
-                <span class="absolute right-3 top-2.5 text-sm text-ink-muted">€</span>
-              </div>
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1">Essentielle Ausgaben p.a.</label>
-              <div class="relative">
-                <input type="number" min="0" step="0.01" class="w-full rounded-xl border border-surface-200 pl-3.5 pr-12 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30" name="annual_essential_spend" placeholder="z. B. 36000" required />
-                <span class="absolute right-3 top-2.5 text-sm text-ink-muted">€</span>
-              </div>
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1">Geplante jährliche Beiträge</label>
-              <div class="relative">
-                <input type="number" min="0" step="0.01" class="w-full rounded-xl border border-surface-200 pl-3.5 pr-12 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30" name="annual_contribution" placeholder="z. B. 12000" required />
-                <span class="absolute right-3 top-2.5 text-sm text-ink-muted">€</span>
-              </div>
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1">Gesamtschulden</label>
-              <div class="relative">
-                <input type="number" min="0" step="0.01" class="w-full rounded-xl border border-surface-200 pl-3.5 pr-12 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30" name="total_debt" placeholder="z. B. 80000" required />
-                <span class="absolute right-3 top-2.5 text-sm text-ink-muted">€</span>
-              </div>
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1">Jährliche Kreditrate</label>
-              <div class="relative">
-                <input type="number" min="0" step="0.01" class="w-full rounded-xl border border-surface-200 pl-3.5 pr-12 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30" name="annual_debt_service" placeholder="z. B. 12000" required />
-                <span class="absolute right-3 top-2.5 text-sm text-ink-muted">€</span>
-              </div>
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1">Notgroschen (in Monaten Ausgaben)</label>
-              <input type="number" min="0" step="0.1" class="w-full rounded-xl border border-surface-200 px-3.5 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30" name="emergency_fund_months" placeholder="z. B. 2" required />
-              <p class="text-xs text-ink-muted mt-1">Empfehlung: mind. 3 Monate als Reserve.</p>
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1">Land</label>
-              <input type="text" class="w-full rounded-xl border border-surface-200 px-3.5 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30" name="country" placeholder="DE" required />
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1">Realer risikofreier Zins (optional)</label>
-              <input type="number" step="0.0001" class="w-full rounded-xl border border-surface-200 px-3.5 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30" name="rf_real" placeholder="0.0" />
-              <p class="text-xs text-ink-muted mt-1">Wenn leer, verwenden wir 0,0 %.</p>
-            </div>
+          <div class="w-full bg-surface-100 rounded-full h-2">
+            <div id="progress-bar" class="bg-accent h-2 rounded-full transition-all duration-500" style="width: 20%"></div>
           </div>
-          <div class="grid sm:grid-cols-3 gap-4 mt-4">
-            <div>
-              <label class="block text-sm font-medium mb-1">Nächstes Ziel: Betrag</label>
-              <div class="relative">
-                <input type="number" min="0" step="0.01" class="w-full rounded-xl border border-surface-200 pl-3.5 pr-12 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30" name="ntl_amount" placeholder="z. B. 15000" required />
-                <span class="absolute right-3 top-2.5 text-sm text-ink-muted">€</span>
-              </div>
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1">Fällig in (Jahren)</label>
-              <input type="number" min="0" step="0.1" class="w-full rounded-xl border border-surface-200 px-3.5 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30" name="ntl_years" placeholder="z. B. 2" required />
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1">Abdeckung</label>
-              <select class="w-full rounded-xl border border-surface-200 px-3.5 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30" name="ntl_coverage" required>
-                <option value="not_covered">nicht abgedeckt</option>
-                <option value="partial">teilweise</option>
-                <option value="covered_or_far">abgedeckt oder >3J</option>
-              </select>
-            </div>
+          <div class="text-center mt-3 text-sm text-ink-muted">
+            Schritt <span id="current-step-display">1</span> von <span id="total-steps-display">5</span>
           </div>
         </div>
 
-        <!-- Risk Tolerance -->
-        <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200">
-          <div class="flex items-start justify-between gap-4 mb-5">
-            <div>
-              <h2 class="text-lg font-semibold">Verhalten & Erfahrung</h2>
-              <p class="text-sm text-ink-muted mt-1">Wie würden Sie bei Schwankungen reagieren, und welche Erfahrung bringen Sie mit?</p>
-            </div>
-            <span class="inline-flex h-8 px-3 items-center rounded-md bg-accent/10 text-accent text-xs font-semibold ring-1 ring-accent/20">Schritt 2</span>
-          </div>
-          <div class="space-y-6">
-            <div>
-              <label class="block text-sm font-medium mb-2">Wie viel zwischenzeitlichen Verlust (1 Jahr) können Sie aushalten?</label>
-              <div class="grid sm:grid-cols-4 gap-2" data-rt="QRT1">
-                {% for label in ['<=5%','10%','15%','20%','30%','40%','>=50%'] %}
-                <label class="flex items-center gap-2 px-3 py-2 rounded-xl ring-1 ring-surface-200 hover:bg-surface-50 cursor-pointer"><input type="radio" name="QRT1" value="{{label}}" required class="text-accent focus:ring-accent"> <span>{{label}}</span></label>
-                {% endfor %}
+        <!-- Form -->
+        <form id="onboarding-form" class="space-y-6">
+          
+          <!-- STEP 1: Basic Profile -->
+          <div class="step-content active" data-step="1">
+            <div class="rounded-2xl bg-white p-8 md:p-10 ring-1 ring-inset ring-surface-200 shadow-soft">
+              <div class="mb-8">
+                <h2 class="font-display text-2xl md:text-3xl tracking-tight leading-tight text-ink mb-2">Persönliche Angaben</h2>
+                <p class="text-ink-muted">Beginnen wir mit den Grundlagen zu Ihrer aktuellen Situation.</p>
               </div>
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-2">Was tun Sie bei −20 % in einem Monat?</label>
-              <div class="grid sm:grid-cols-4 gap-2" data-rt="QRT2">
-                {% for label in ['sell all','sell some','hold','buy more'] %}
-                <label class="flex items-center gap-2 px-3 py-2 rounded-xl ring-1 ring-surface-200 hover:bg-surface-50 cursor-pointer"><input type="radio" name="QRT2" value="{{label}}" required class="text-accent focus:ring-accent"> <span>{{label}}</span></label>
-                {% endfor %}
-              </div>
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-2">Wie erfahren sind Sie beim Investieren?</label>
-              <div class="grid sm:grid-cols-5 gap-2" data-rt="QRT3">
-                {% for label in ['new','1-3y','3-7y','7-15y','>15y'] %}
-                <label class="flex items-center gap-2 px-3 py-2 rounded-xl ring-1 ring-surface-200 hover:bg-surface-50 cursor-pointer"><input type="radio" name="QRT3" value="{{label}}" required class="text-accent focus:ring-accent"> <span>{{label}}</span></label>
-                {% endfor %}
-              </div>
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-2">Was ist Ihnen wichtiger?</label>
-              <div class="grid sm:grid-cols-5 gap-2" data-rt="QRT4">
-                {% for label in ['strongly agree','agree','neutral','disagree','strongly disagree'] %}
-                <label class="flex items-center gap-2 px-3 py-2 rounded-xl ring-1 ring-surface-200 hover:bg-surface-50 cursor-pointer"><input type="radio" name="QRT4" value="{{label}}" required class="text-accent focus:ring-accent"> <span>{{label}}</span></label>
-                {% endfor %}
-              </div>
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-2">Und in früheren Crashs?</label>
-              <div class="grid sm:grid-cols-4 gap-2" data-rt="QRT5">
-                {% for label in ['sold near lows','paused contributions','held','rebalanced/bought'] %}
-                <label class="flex items-center gap-2 px-3 py-2 rounded-xl ring-1 ring-surface-200 hover:bg-surface-50 cursor-pointer"><input type="radio" name="QRT5" value="{{label}}" required class="text-accent focus:ring-accent"> <span>{{label}}</span></label>
-                {% endfor %}
+              
+              <div class="space-y-6">
+                <div class="grid sm:grid-cols-2 gap-6">
+                  <div>
+                    <label class="block text-sm font-medium mb-2 text-ink">Wie alt sind Sie?</label>
+                    <input type="number" min="0" step="1" class="w-full rounded-xl border border-surface-200 px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all" name="age" placeholder="z. B. 35" required />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium mb-2 text-ink">Geplantes Rentenalter</label>
+                    <input type="number" min="0" step="1" class="w-full rounded-xl border border-surface-200 px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all" name="retirement_age" placeholder="z. B. 65" required />
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium mb-2 text-ink">Land</label>
+                  <input type="text" class="w-full max-w-md rounded-xl border border-surface-200 px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all" name="country" placeholder="DE" required />
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Capacity / Income Stability -->
-        <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200">
-          <div class="flex items-start justify-between gap-4 mb-5">
-            <div>
-              <h2 class="text-lg font-semibold">Einkommensstabilität</h2>
-              <p class="text-sm text-ink-muted mt-1">Wie planbar ist Ihr Einkommen?</p>
-            </div>
-            <span class="inline-flex h-8 px-3 items-center rounded-md bg-accent/10 text-accent text-xs font-semibold ring-1 ring-accent/20">Schritt 3</span>
-          </div>
-          <div class="grid sm:grid-cols-4 gap-2">
-            {% for label,val in [('Auftragsbasiert','contract'),('Gemischt','mixed'),('Fest angestellt','stable_employee'),('Verbeamtet/Tenure','tenured')] %}
-            <label class="flex items-center gap-2 px-3 py-2 rounded-xl ring-1 ring-surface-200 hover:bg-surface-50 cursor-pointer"><input type="radio" name="income_stability" value="{{val}}" required class="text-accent focus:ring-accent"> <span>{{label}}</span></label>
-            {% endfor %}
-          </div>
-        </div>
-
-        <!-- Need / Goal -->
-        <div class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200">
-          <div class="flex items-start justify-between gap-4 mb-5">
-            <div>
-              <h2 class="text-lg font-semibold">Ihr Ziel</h2>
-              <p class="text-sm text-ink-muted mt-1">Wählen Sie entweder jährlichen Bedarf im Ruhestand oder ein Zielvermögen.</p>
-            </div>
-            <span class="inline-flex h-8 px-3 items-center rounded-md bg-accent/10 text-accent text-xs font-semibold ring-1 ring-accent/20">Schritt 4</span>
-          </div>
-          <div class="flex items-center gap-4 mb-4">
-            <label class="flex items-center gap-2"><input type="radio" name="need_mode" value="target_spend" checked class="text-accent focus:ring-accent"> <span>Jährlicher Bedarf</span></label>
-            <label class="flex items-center gap-2"><input type="radio" name="need_mode" value="w_target" class="text-accent focus:ring-accent"> <span>Zielvermögen</span></label>
-          </div>
-          <div class="grid sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium mb-1">Jährlicher Bedarf</label>
-              <div class="relative">
-                <input type="number" min="0" step="0.01" class="w-full rounded-xl border border-surface-200 pl-3.5 pr-12 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30" name="target_spend" placeholder="z. B. 36000" />
-                <span class="absolute right-3 top-2.5 text-sm text-ink-muted">€</span>
+          <!-- STEP 2: Financial Snapshot -->
+          <div class="step-content" data-step="2">
+            <div class="rounded-2xl bg-white p-8 md:p-10 ring-1 ring-inset ring-surface-200 shadow-soft">
+              <div class="mb-8">
+                <h2 class="font-display text-2xl md:text-3xl tracking-tight leading-tight text-ink mb-2">Ihre finanzielle Situation</h2>
+                <p class="text-ink-muted">Vermögen, Einkommen und laufende Ausgaben.</p>
               </div>
-              <p class="text-xs text-ink-muted mt-1">Standardannahme: Zielvermögen ≈ Bedarf / 0,03.</p>
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1">Zielvermögen</label>
-              <div class="relative">
-                <input type="number" min="0" step="0.01" class="w-full rounded-xl border border-surface-200 pl-3.5 pr-12 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30" name="w_target" placeholder="z. B. 1200000" />
-                <span class="absolute right-3 top-2.5 text-sm text-ink-muted">€</span>
+              
+              <div class="space-y-6">
+                <div class="grid sm:grid-cols-2 gap-6">
+                  <div>
+                    <label class="block text-sm font-medium mb-2 text-ink">Investierbares Vermögen</label>
+                    <div class="relative">
+                      <input type="number" min="0" step="0.01" class="w-full rounded-xl border border-surface-200 pl-4 pr-12 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all" name="investable_assets" placeholder="120000" required />
+                      <span class="absolute right-4 top-3 text-sm text-ink-muted font-medium">€</span>
+                    </div>
+                    <p class="text-xs text-ink-muted mt-1.5">Betrag, den Sie aktuell anlegen können</p>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium mb-2 text-ink">Vermögen gesamt</label>
+                    <div class="relative">
+                      <input type="number" min="0" step="0.01" class="w-full rounded-xl border border-surface-200 pl-4 pr-12 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all" name="net_worth" placeholder="250000" required />
+                      <span class="absolute right-4 top-3 text-sm text-ink-muted font-medium">€</span>
+                    </div>
+                    <p class="text-xs text-ink-muted mt-1.5">Ihr gesamtes Nettovermögen</p>
+                  </div>
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-6">
+                  <div>
+                    <label class="block text-sm font-medium mb-2 text-ink">Nettoeinkommen pro Jahr</label>
+                    <div class="relative">
+                      <input type="number" min="0" step="0.01" class="w-full rounded-xl border border-surface-200 pl-4 pr-12 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all" name="annual_income_after_tax" placeholder="65000" required />
+                      <span class="absolute right-4 top-3 text-sm text-ink-muted font-medium">€</span>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium mb-2 text-ink">Essentielle Ausgaben pro Jahr</label>
+                    <div class="relative">
+                      <input type="number" min="0" step="0.01" class="w-full rounded-xl border border-surface-200 pl-4 pr-12 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all" name="annual_essential_spend" placeholder="36000" required />
+                      <span class="absolute right-4 top-3 text-sm text-ink-muted font-medium">€</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium mb-2 text-ink">Geplante jährliche Beiträge</label>
+                  <div class="relative max-w-md">
+                    <input type="number" min="0" step="0.01" class="w-full rounded-xl border border-surface-200 pl-4 pr-12 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all" name="annual_contribution" placeholder="12000" required />
+                    <span class="absolute right-4 top-3 text-sm text-ink-muted font-medium">€</span>
+                  </div>
+                  <p class="text-xs text-ink-muted mt-1.5">Wie viel möchten Sie jährlich investieren?</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="flex items-center gap-3">
-          <button id="submit" type="submit" class="px-6 py-3.5 rounded-xl bg-accent hover:bg-accent/90 text-white font-semibold shadow-soft">Score berechnen</button>
-          <span id="form-error" class="text-sm text-red-600"></span>
-        </div>
-      </form>
+          <!-- STEP 3: Debt & Obligations -->
+          <div class="step-content" data-step="3">
+            <div class="rounded-2xl bg-white p-8 md:p-10 ring-1 ring-inset ring-surface-200 shadow-soft">
+              <div class="mb-8">
+                <h2 class="font-display text-2xl md:text-3xl tracking-tight leading-tight text-ink mb-2">Verbindlichkeiten & Rücklagen</h2>
+                <p class="text-ink-muted">Schulden, Notgroschen und kurzfristige finanzielle Ziele.</p>
+              </div>
+              
+              <div class="space-y-6">
+                <div class="grid sm:grid-cols-2 gap-6">
+                  <div>
+                    <label class="block text-sm font-medium mb-2 text-ink">Gesamtschulden</label>
+                    <div class="relative">
+                      <input type="number" min="0" step="0.01" class="w-full rounded-xl border border-surface-200 pl-4 pr-12 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all" name="total_debt" placeholder="80000" required />
+                      <span class="absolute right-4 top-3 text-sm text-ink-muted font-medium">€</span>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium mb-2 text-ink">Jährliche Kreditrate</label>
+                    <div class="relative">
+                      <input type="number" min="0" step="0.01" class="w-full rounded-xl border border-surface-200 pl-4 pr-12 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all" name="annual_debt_service" placeholder="12000" required />
+                      <span class="absolute right-4 top-3 text-sm text-ink-muted font-medium">€</span>
+                    </div>
+                  </div>
+                </div>
 
-      <!-- Result panel -->
-      <aside class="lg:col-span-1">
-        <div id="result" class="rounded-2xl bg-white p-6 ring-1 ring-inset ring-surface-200 hidden">
-          <div class="flex items-center justify-between mb-4">
-            <h2 class="text-lg font-semibold">Ihr Ergebnis</h2>
-            <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-accent text-white font-bold text-lg" id="rs_badge">–</span>
+                <div>
+                  <label class="block text-sm font-medium mb-2 text-ink">Notgroschen (in Monaten Ausgaben)</label>
+                  <input type="number" min="0" step="0.1" class="w-full max-w-md rounded-xl border border-surface-200 px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all" name="emergency_fund_months" placeholder="3" required />
+                  <p class="text-xs text-ink-muted mt-1.5">Empfehlung: mind. 3–6 Monate als Reserve</p>
+                </div>
+
+                <div class="pt-4 border-t border-surface-200">
+                  <h3 class="text-base font-semibold mb-4 text-ink">Nächstes größeres finanzielles Ziel</h3>
+                  <p class="text-sm text-ink-muted mb-4">z. B. Autokauf, Hochzeit, Renovierung</p>
+                  <div class="grid sm:grid-cols-3 gap-6">
+                    <div>
+                      <label class="block text-sm font-medium mb-2 text-ink">Betrag</label>
+                      <div class="relative">
+                        <input type="number" min="0" step="0.01" class="w-full rounded-xl border border-surface-200 pl-4 pr-12 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all" name="ntl_amount" placeholder="15000" required />
+                        <span class="absolute right-4 top-3 text-sm text-ink-muted font-medium">€</span>
+                      </div>
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium mb-2 text-ink">Fällig in (Jahren)</label>
+                      <input type="number" min="0" step="0.1" class="w-full rounded-xl border border-surface-200 px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all" name="ntl_years" placeholder="2" required />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium mb-2 text-ink">Abdeckung</label>
+                      <select class="w-full rounded-xl border border-surface-200 px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all" name="ntl_coverage" required>
+                        <option value="not_covered">nicht abgedeckt</option>
+                        <option value="partial">teilweise</option>
+                        <option value="covered_or_far">abgedeckt oder >3J</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium mb-2 text-ink">Realer risikofreier Zins (optional)</label>
+                  <input type="number" step="0.0001" class="w-full max-w-md rounded-xl border border-surface-200 px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all" name="rf_real" placeholder="0.0" />
+                  <p class="text-xs text-ink-muted mt-1.5">Standardwert: 0,0 % (lassen Sie leer, wenn unsicher)</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="space-y-3 text-sm">
-            <div class="flex items-center justify-between"><span class="text-ink-muted">Risiko‑Score (0–100)</span> <span id="rs">–</span></div>
-            <div class="flex items-center justify-between"><span class="text-ink-muted">Toleranz · Kapazität · Bedarf</span> <span><span id="rt">–</span> · <span id="rc">–</span> · <span id="rn">–</span></span></div>
-            <div class="flex items-center justify-between"><span class="text-ink-muted">Mehrbedarf vs. risikofrei (pp)</span> <span id="need_gap">–</span></div>
-            <div id="annotations" class="text-ink-muted"></div>
+
+          <!-- STEP 4: Risk Tolerance -->
+          <div class="step-content" data-step="4">
+            <div class="rounded-2xl bg-white p-8 md:p-10 ring-1 ring-inset ring-surface-200 shadow-soft">
+              <div class="mb-8">
+                <h2 class="font-display text-2xl md:text-3xl tracking-tight leading-tight text-ink mb-2">Verhalten & Erfahrung</h2>
+                <p class="text-ink-muted">Wie würden Sie bei Schwankungen reagieren, und welche Erfahrung bringen Sie mit?</p>
+              </div>
+              
+              <div class="space-y-8">
+                <div>
+                  <label class="block text-sm font-medium mb-3 text-ink">Wie viel zwischenzeitlichen Verlust (1 Jahr) können Sie aushalten?</label>
+                  <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2">
+                    {% for label in ['<=5%','10%','15%','20%','30%','40%','>=50%'] %}
+                    <label class="flex items-center justify-center gap-2 px-3 py-3 rounded-xl ring-1 ring-surface-200 hover:bg-accent/5 hover:ring-accent/30 cursor-pointer transition-all has-[:checked]:bg-accent has-[:checked]:text-white has-[:checked]:ring-accent">
+                      <input type="radio" name="QRT1" value="{{label}}" required class="sr-only">
+                      <span class="text-sm font-medium">{{label}}</span>
+                    </label>
+                    {% endfor %}
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium mb-3 text-ink">Was tun Sie bei −20 % in einem Monat?</label>
+                  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                    {% for label in ['sell all','sell some','hold','buy more'] %}
+                    <label class="flex items-center gap-3 px-4 py-3 rounded-xl ring-1 ring-surface-200 hover:bg-accent/5 hover:ring-accent/30 cursor-pointer transition-all has-[:checked]:bg-accent/10 has-[:checked]:ring-accent">
+                      <input type="radio" name="QRT2" value="{{label}}" required class="text-accent focus:ring-accent">
+                      <span class="text-sm font-medium">{{label}}</span>
+                    </label>
+                    {% endfor %}
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium mb-3 text-ink">Wie erfahren sind Sie beim Investieren?</label>
+                  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                    {% for label in ['new','1-3y','3-7y','7-15y','>15y'] %}
+                    <label class="flex items-center gap-3 px-4 py-3 rounded-xl ring-1 ring-surface-200 hover:bg-accent/5 hover:ring-accent/30 cursor-pointer transition-all has-[:checked]:bg-accent/10 has-[:checked]:ring-accent">
+                      <input type="radio" name="QRT3" value="{{label}}" required class="text-accent focus:ring-accent">
+                      <span class="text-sm font-medium">{{label}}</span>
+                    </label>
+                    {% endfor %}
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium mb-3 text-ink">Langfristiger Vermögensaufbau ist mir wichtiger als kurzfristige Sicherheit</label>
+                  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                    {% for label in ['strongly agree','agree','neutral','disagree','strongly disagree'] %}
+                    <label class="flex items-center gap-3 px-4 py-3 rounded-xl ring-1 ring-surface-200 hover:bg-accent/5 hover:ring-accent/30 cursor-pointer transition-all has-[:checked]:bg-accent/10 has-[:checked]:ring-accent">
+                      <input type="radio" name="QRT4" value="{{label}}" required class="text-accent focus:ring-accent">
+                      <span class="text-sm font-medium">{{label}}</span>
+                    </label>
+                    {% endfor %}
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium mb-3 text-ink">Wie haben Sie in früheren Crashs reagiert?</label>
+                  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                    {% for label in ['sold near lows','paused contributions','held','rebalanced/bought'] %}
+                    <label class="flex items-center gap-3 px-4 py-3 rounded-xl ring-1 ring-surface-200 hover:bg-accent/5 hover:ring-accent/30 cursor-pointer transition-all has-[:checked]:bg-accent/10 has-[:checked]:ring-accent">
+                      <input type="radio" name="QRT5" value="{{label}}" required class="text-accent focus:ring-accent">
+                      <span class="text-sm font-medium">{{label}}</span>
+                    </label>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="mt-5 p-3 rounded-xl bg-surface-50 ring-1 ring-surface-200 text-xs text-ink-muted">Hinweis: Der Score ist eine Orientierung. Wir berücksichtigen Liquiditätsreserve und nahe Ziele.</div>
+
+          <!-- STEP 5: Income Stability & Goals -->
+          <div class="step-content" data-step="5">
+            <div class="rounded-2xl bg-white p-8 md:p-10 ring-1 ring-inset ring-surface-200 shadow-soft">
+              <div class="mb-8">
+                <h2 class="font-display text-2xl md:text-3xl tracking-tight leading-tight text-ink mb-2">Einkommensstabilität & Ziele</h2>
+                <p class="text-ink-muted">Letzte Fragen zu Ihrer Einkommenssituation und Ihren Zielen.</p>
+              </div>
+              
+              <div class="space-y-8">
+                <div>
+                  <label class="block text-sm font-medium mb-3 text-ink">Wie planbar ist Ihr Einkommen?</label>
+                  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                    {% for label,val in [('Auftragsbasiert','contract'),('Gemischt','mixed'),('Fest angestellt','stable_employee'),('Verbeamtet/Tenure','tenured')] %}
+                    <label class="flex items-center gap-3 px-4 py-3 rounded-xl ring-1 ring-surface-200 hover:bg-accent/5 hover:ring-accent/30 cursor-pointer transition-all has-[:checked]:bg-accent/10 has-[:checked]:ring-accent">
+                      <input type="radio" name="income_stability" value="{{val}}" required class="text-accent focus:ring-accent">
+                      <span class="text-sm font-medium">{{label}}</span>
+                    </label>
+                    {% endfor %}
+                  </div>
+                </div>
+
+                <div class="pt-4 border-t border-surface-200">
+                  <h3 class="text-base font-semibold mb-3 text-ink">Ihr finanzielles Ziel im Ruhestand</h3>
+                  <p class="text-sm text-ink-muted mb-4">Wählen Sie entweder jährlichen Bedarf oder ein Zielvermögen</p>
+                  
+                  <div class="flex items-center gap-4 mb-6">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="need_mode" value="target_spend" checked class="text-accent focus:ring-accent">
+                      <span class="font-medium">Jährlicher Bedarf</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="need_mode" value="w_target" class="text-accent focus:ring-accent">
+                      <span class="font-medium">Zielvermögen</span>
+                    </label>
+                  </div>
+
+                  <div class="grid sm:grid-cols-2 gap-6">
+                    <div>
+                      <label class="block text-sm font-medium mb-2 text-ink">Jährlicher Bedarf im Ruhestand</label>
+                      <div class="relative">
+                        <input type="number" min="0" step="0.01" class="w-full rounded-xl border border-surface-200 pl-4 pr-12 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all" name="target_spend" placeholder="36000" />
+                        <span class="absolute right-4 top-3 text-sm text-ink-muted font-medium">€</span>
+                      </div>
+                      <p class="text-xs text-ink-muted mt-1.5">Standardannahme: Zielvermögen ≈ Bedarf / 0,03</p>
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium mb-2 text-ink">Zielvermögen bei Renteneintritt</label>
+                      <div class="relative">
+                        <input type="number" min="0" step="0.01" class="w-full rounded-xl border border-surface-200 pl-4 pr-12 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all" name="w_target" placeholder="1200000" />
+                        <span class="absolute right-4 top-3 text-sm text-ink-muted font-medium">€</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation Buttons -->
+          <div class="flex items-center justify-between pt-4">
+            <button type="button" id="prev-btn" class="px-6 py-3 rounded-xl border border-surface-200 hover:bg-surface-50 transition-all font-medium hidden">
+              <span class="flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                Zurück
+              </span>
+            </button>
+            <button type="button" id="next-btn" class="ml-auto px-6 py-3 rounded-xl bg-accent hover:bg-accent/90 text-white font-semibold shadow-soft transition-all hover:scale-105">
+              <span class="flex items-center gap-2">
+                Weiter
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+              </span>
+            </button>
+            <button type="submit" id="submit-btn" class="ml-auto px-6 py-3 rounded-xl bg-accent hover:bg-accent/90 text-white font-semibold shadow-soft transition-all hover:scale-105 hidden">
+              Score berechnen
+            </button>
+          </div>
+          <div id="form-error" class="text-sm text-red-600 text-center"></div>
+        </form>
+
+        <!-- Result Panel (Appears after submission) -->
+        <div id="result" class="hidden mt-8">
+          <div class="rounded-2xl bg-white p-8 ring-1 ring-inset ring-surface-200 shadow-soft">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="font-display text-2xl tracking-tight text-ink">Ihr Ergebnis</h2>
+              <div class="flex items-center justify-center w-16 h-16 rounded-full bg-accent text-white font-bold text-2xl" id="rs_badge">–</div>
+            </div>
+            <div class="space-y-4">
+              <div class="flex items-center justify-between py-3 border-b border-surface-100">
+                <span class="text-ink-muted">Risiko‑Score (0–100)</span>
+                <span class="font-semibold text-lg" id="rs">–</span>
+              </div>
+              <div class="flex items-center justify-between py-3 border-b border-surface-100">
+                <span class="text-ink-muted">Toleranz · Kapazität · Bedarf</span>
+                <span class="font-medium"><span id="rt">–</span> · <span id="rc">–</span> · <span id="rn">–</span></span>
+              </div>
+              <div class="flex items-center justify-between py-3 border-b border-surface-100">
+                <span class="text-ink-muted">Mehrbedarf vs. risikofrei (pp)</span>
+                <span class="font-medium" id="need_gap">–</span>
+              </div>
+              <div id="annotations" class="text-sm text-ink-muted pt-2"></div>
+            </div>
+            <div class="mt-6 p-4 rounded-xl bg-surface-50 ring-1 ring-surface-200 text-sm text-ink-muted">
+              <p class="font-medium text-ink mb-1">Hinweis</p>
+              Der Score ist eine Orientierung. Wir berücksichtigen Liquiditätsreserve und nahe Ziele bei der Portfolio-Erstellung.
+            </div>
+          </div>
         </div>
-      </aside>
+      </div>
     </section>
   </main>
 
+  <footer class="border-t border-surface-200 py-12 text-center text-ink-muted">
+    <p class="mb-2">© <span id="year">2025</span> Friedrich Beratung. Alle Rechte vorbehalten.</p>
+    <div class="flex justify-center gap-6 text-sm mt-4">
+      <a href="/impressum" class="hover:text-ink transition-colors">Impressum</a>
+      <a href="/datenschutz" class="hover:text-ink transition-colors">Datenschutz</a>
+      <a href="/agb" class="hover:text-ink transition-colors">AGB</a>
+    </div>
+  </footer>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.js"></script>
-  <script src="{{ url_for('static', filename='js/onboarding.js') }}"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Multi-step form logic
+    const form = document.getElementById('onboarding-form');
+    const steps = document.querySelectorAll('.step-content');
+    const totalSteps = steps.length;
+    let currentStep = 1;
+
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const submitBtn = document.getElementById('submit-btn');
+    const progressBar = document.getElementById('progress-bar');
+    const currentStepDisplay = document.getElementById('current-step-display');
+    const totalStepsDisplay = document.getElementById('total-steps-display');
+    const stepIndicatorsContainer = document.getElementById('step-indicators');
+
+    // Initialize step indicators
+    function initStepIndicators() {
+      for (let i = 1; i <= totalSteps; i++) {
+        const indicator = document.createElement('div');
+        indicator.className = 'step-indicator w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold ring-2 ring-surface-200 bg-white';
+        if (i === 1) indicator.classList.add('active', 'ring-accent', 'text-accent');
+        indicator.textContent = i;
+        indicator.dataset.step = i;
+        stepIndicatorsContainer.appendChild(indicator);
+      }
+    }
+
+    initStepIndicators();
+    totalStepsDisplay.textContent = totalSteps;
+
+    function updateUI() {
+      // Update step content visibility
+      steps.forEach((step, idx) => {
+        step.classList.toggle('active', idx + 1 === currentStep);
+      });
+
+      // Update step indicators
+      document.querySelectorAll('.step-indicator').forEach((indicator, idx) => {
+        indicator.classList.remove('active', 'completed', 'ring-accent', 'text-accent', 'bg-accent', 'text-white');
+        indicator.classList.add('ring-surface-200', 'bg-white');
+        
+        if (idx + 1 < currentStep) {
+          indicator.classList.add('completed', 'bg-accent/10', 'ring-accent/30', 'text-accent');
+        } else if (idx + 1 === currentStep) {
+          indicator.classList.add('active', 'ring-accent', 'bg-accent', 'text-white');
+        }
+      });
+
+      // Update progress bar
+      const progress = (currentStep / totalSteps) * 100;
+      progressBar.style.width = progress + '%';
+
+      // Update step display
+      currentStepDisplay.textContent = currentStep;
+
+      // Update button visibility
+      prevBtn.classList.toggle('hidden', currentStep === 1);
+      nextBtn.classList.toggle('hidden', currentStep === totalSteps);
+      submitBtn.classList.toggle('hidden', currentStep !== totalSteps);
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function validateCurrentStep() {
+      const currentStepEl = document.querySelector(`.step-content[data-step="${currentStep}"]`);
+      const inputs = currentStepEl.querySelectorAll('input[required], select[required]');
+      
+      for (let input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          return false;
+        }
+        // Check radio groups
+        if (input.type === 'radio') {
+          const radioGroup = currentStepEl.querySelectorAll(`input[name="${input.name}"]`);
+          const isChecked = Array.from(radioGroup).some(radio => radio.checked);
+          if (!isChecked) {
+            input.reportValidity();
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (validateCurrentStep()) {
+        currentStep = Math.min(currentStep + 1, totalSteps);
+        updateUI();
+      }
+    });
+
+    prevBtn.addEventListener('click', () => {
+      currentStep = Math.max(currentStep - 1, 1);
+      updateUI();
+    });
+
+    // Form submission (keeping existing onboarding.js logic)
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!validateCurrentStep()) return;
+
+      const errorEl = document.getElementById('form-error');
+      errorEl.textContent = '';
+
+      const formData = new FormData(form);
+      const data = {
+        profile: {
+          age: parseFloat(formData.get('age')),
+          retirement_age: parseFloat(formData.get('retirement_age')),
+          investable_assets: parseFloat(formData.get('investable_assets')),
+          net_worth: parseFloat(formData.get('net_worth')),
+          annual_income_after_tax: parseFloat(formData.get('annual_income_after_tax')),
+          annual_essential_spend: parseFloat(formData.get('annual_essential_spend')),
+          annual_contribution: parseFloat(formData.get('annual_contribution')),
+          total_debt: parseFloat(formData.get('total_debt')),
+          annual_debt_service: parseFloat(formData.get('annual_debt_service')),
+          emergency_fund_months: parseFloat(formData.get('emergency_fund_months')),
+          near_term_liabilities: {
+            amount: parseFloat(formData.get('ntl_amount')),
+            years_until_due: parseFloat(formData.get('ntl_years')),
+            coverage_status: formData.get('ntl_coverage')
+          },
+          country: formData.get('country'),
+          rf_real: formData.get('rf_real') ? parseFloat(formData.get('rf_real')) : null
+        },
+        rt_answers: {
+          QRT1: formData.get('QRT1'),
+          QRT2: formData.get('QRT2'),
+          QRT3: formData.get('QRT3'),
+          QRT4: formData.get('QRT4'),
+          QRT5: formData.get('QRT5')
+        },
+        income_stability: formData.get('income_stability'),
+        w_target: formData.get('need_mode') === 'w_target' && formData.get('w_target') ? parseFloat(formData.get('w_target')) : null,
+        target_spend: formData.get('need_mode') === 'target_spend' && formData.get('target_spend') ? parseFloat(formData.get('target_spend')) : null
+      };
+
+      try {
+        const response = await fetch('/api/onboarding/assessment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.message || 'Server error');
+        }
+
+        const result = await response.json();
+        
+        // Display results
+        document.getElementById('rs_badge').textContent = Math.round(result.rs);
+        document.getElementById('rs').textContent = result.rs.toFixed(1);
+        document.getElementById('rt').textContent = result.rt.toFixed(1);
+        document.getElementById('rc').textContent = result.rc.toFixed(1);
+        document.getElementById('rn').textContent = result.rn.toFixed(1);
+        document.getElementById('need_gap').textContent = result.need_gap_pp.toFixed(2);
+        
+        const annotEl = document.getElementById('annotations');
+        annotEl.innerHTML = '';
+        if (result.annotations && result.annotations.length > 0) {
+          result.annotations.forEach(ann => {
+            const p = document.createElement('p');
+            p.className = 'mt-1';
+            p.textContent = '• ' + ann;
+            annotEl.appendChild(p);
+          });
+        }
+
+        document.getElementById('result').classList.remove('hidden');
+        document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } catch (error) {
+        errorEl.textContent = 'Fehler: ' + error.message;
+      }
+    });
+  </script>
 </body>
 </html>
-
-
