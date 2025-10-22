@@ -84,3 +84,8 @@ def testing(filename):
     if filename not in get_name_of_templates('app/templates/testing'):
         abort(404)
     return render_template(f'testing/{filename}', current_user=current_user, year=datetime.now().year)
+
+
+@main_bp.route('/onboarding')
+def onboarding_form():
+    return render_template('onboarding/form.html', current_user=current_user, year=datetime.now().year)
