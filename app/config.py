@@ -74,7 +74,9 @@ class DevelopmentConfig(BaseConfig):
     SESSION_COOKIE_SECURE = False
     SESSION_COOKIE_HTTPONLY = False
     SESSION_COOKIE_SAMESITE = "Lax"
-    TALISMAN_FORCE_HTTPS = False                       # ← no redirect
+    TALISMAN_FORCE_HTTPS = False                    # ← no redirect
+    DEV_USER_ID = "dev-user"
+    LOGIN_DISABLED = True
     TALISMAN_CSP = {
         **BaseConfig.TALISMAN_CSP,
         "script-src": [

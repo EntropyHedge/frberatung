@@ -12,6 +12,7 @@ from .extensions import db, cache, limiter, talisman, login_manager, configure_c
 from .blueprints.main import main_bp
 from .blueprints.auth import auth_bp
 from .blueprints.api import api_bp
+from .blueprints.onboarding import onboarding_bp
 
 
 def create_app(config_class=None):
@@ -63,6 +64,7 @@ def create_app(config_class=None):
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(api_bp)
+    app.register_blueprint(onboarding_bp)
     # Error handlers
     @app.errorhandler(404)
     def page_not_found(e):

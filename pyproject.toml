@@ -8,32 +8,27 @@ dependencies = [
     # Core Flask
     "Flask==3.1.0",
     "Werkzeug==3.1.3",
-    
     # Flask Extensions
     "Flask-SQLAlchemy==3.1.1",
     "Flask-Migrate==4.1.0",
     "Flask-Session==0.8.0",
     "Flask-Login==0.6.3",
+    "flask-restful==0.3.10",
     "Flask-Caching==2.3.0",
     "Flask-Limiter==3.10.1",
     "flask-talisman==1.1.0",
-    
     # Database
     "SQLAlchemy==2.0.38",
     "psycopg2-binary==2.9.10",
     "alembic==1.14.1",
-    
     # Celery & Task Queue
     "celery==5.4.0",
     "redis==5.2.1",
-    
     # API & Serialization
     "marshmallow==3.26.1",
     "requests==2.32.3",
-    
     # Server
     "gunicorn>=23.0.0",
-    
     # Configuration
     "python-dotenv==1.0.1",
 ]
