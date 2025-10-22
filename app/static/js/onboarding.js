@@ -2,6 +2,7 @@
   const form = document.getElementById('onboarding-form');
   const errEl = document.getElementById('form-error');
   const result = document.getElementById('result');
+  const submitBtn = document.getElementById('submit');
   const q = sel => document.querySelector(sel);
 
   function val(name) {
@@ -88,12 +89,17 @@
     e.preventDefault();
     errEl.textContent = '';
     try {
+      submitBtn.disabled = true;
+      submitBtn.classList.add('opacity-60');
       const payload = buildPayload();
       const data = await postAssessment(payload);
       renderResult(data);
+      result.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } catch (err) {
       errEl.textContent = 'Fehler beim Absenden: ' + (err.message || String(err));
     }
+    submitBtn.disabled = false;
+    submitBtn.classList.remove('opacity-60');
   });
 })();
 
